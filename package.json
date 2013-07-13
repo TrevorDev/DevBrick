@@ -1,0 +1,21 @@
+{
+	"name": "devBick",
+	"description": "websiteGen",
+	"version": "0.0.1",
+	"engines": {
+	    "node": "0.11.x",
+	    "npm":  "1.2.x"
+  	},
+	"private": true,
+	"dependencies": {
+		"express": "x.x",
+		"mongodb": "x.x",
+		"mongoose": "x.x",
+		"bcrypt": "x.x",
+		"escape-html": "x.x",
+		"underscore": "x.x",
+		"rekuire": "x.x",
+		"crypto": "x.x",
+		"ejs": "x.x"
+	}
+}

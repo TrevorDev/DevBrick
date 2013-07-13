@@ -1,0 +1,64 @@
+<% include includes/header %>
+<div class="container-fluid">
+    <!-- Main hero unit for a primary marketing message or call to action
+    -->
+    <div class="row-fluid">
+        <div class="span8">
+
+            <div class="hero-unit">
+                <h1>
+                    <%= largeTitle %>
+                </h1>
+                <p>
+                    <%= slogan %>
+                </p>
+                <p>
+                    <a href="about.php" class="btn btn-primary btn-large">Learn more &raquo;</a>
+                </p>
+            </div>
+
+        </div>
+        <div class="span4">
+            <img style="border-style:solid;border-width:5px;margin-top:30px;" src="<%= bigLogo %>" width="220px">
+        </div>
+
+
+    </div>
+    <!-- Example row of columns -->
+    <div class="row-fluid">
+        <div class="span4">
+            <h2>
+                <%= blockHeading1 %>
+            </h2>
+            <p>
+                <%= block1 %>
+            </p>
+            <p>
+                <a class="btn" href="about.php">View details &raquo;</a>
+            </p>
+        </div>
+        <div class="span4">
+            <h2>
+                <%= blockHeading2 %>
+            </h2>
+            <p>
+                <%= block2 %>
+            </p>
+            <p>
+                <a class="btn" href="services.php">View details &raquo;</a>
+            </p>
+        </div>
+        <div class="span4">
+            <h2>
+                <%= blockHeading3 %>
+            </h2>
+            <p>
+                <%= block3 %>
+            </p>
+            <p>
+                <a class="btn" href="contact.php">View details &raquo;</a>
+            </p>
+        </div>
+    </div>
+</div>
+<% include includes/footer %>

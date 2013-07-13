@@ -1,0 +1,87 @@
+<% include includes/header %>
+            <div class="masthead" id="back1">
+                <div class="container-fluid">
+                     <% if (typeof(error) !== 'undefined') { %>
+                        <div class="alert">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>Warning!</strong> <%= error %>
+                        </div>
+                     <%}%>
+                    <div class="row-fluid">
+                        <div class="span3">
+                            <form class="form-signin" method="post" action="/signUp">
+                                <h3>Get a free account!</h3>
+                                <input type="text" class="input-block-level" placeholder="Email address"
+                                name="email">
+                                <input type="password" class="input-block-level" placeholder="Password"
+                                name="password">
+                                <br>
+                                <button class="btn btn-primary btn-large" style="background-color:#333333;background-color:#222222;" type="submit">
+                                Sign up for a free account
+                                </button>
+                            </form>
+                        </div>
+                        <div class="span6">
+                            <div style="height:220px; display: table-row;">
+                                <div style="display: table-cell; vertical-align: middle;">
+                                    <h1 style="display: inline;">
+                                        Creating a website just got simple.
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span3" align="center">
+                            <img class="picDisplay" style="padding-bottom: 30px;" src="/public/mainSite/assets/img/panda4.svg" width="200px" type="image/svg+xml"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span4">
+                        <h2 align="center">
+                            Easy
+                        </h2>
+                        <h2 align="center"><i class="icon-magic"></i></h2>
+                        <p>
+                            Just specify what you need on display and we will take care of the rest.
+                        </p>
+                    </div>
+                    <div class="span4">
+                        <h2 align="center">
+                            Multi-Device
+                        </h2>
+                        <h2 align="center"><i class="icon-mobile-phone"></i> <i class="icon-tablet"></i> <i class="icon-laptop"></i> <i class="icon-desktop"></i></h2>
+                        <p>
+                            Websites designed for use on phones to desktops and everything in between.
+                        </p>
+                    </div>
+                    <div class="span4">
+                        <h2 align="center">
+                            Top Quality
+                        </h2>
+                        <h2 align="center"><i class="icon-star"></i></h2>
+                        <p>
+                            With a 30 day money back garantee we trust that our product will go beyond your standards.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div id="push">
+            </div>
+        </div>
+        <div id="footer">
+            <div class="container-fluid">
+                <p class="muted credit">
+                    Site created by
+                    <a href="http://trevordev.com">Trevor Baron</a>
+                    .
+                    <t class="pull-right" style="font-size: 20px;">
+                       <!-- <img id="logo" width="130px" src="/public/mainSite/assets/img/nodejs.png" alt="node.js">-->
+            <i class="icon-facebook-sign"></i> <i class="icon-twitter-sign"></i> <i class="icon-google-plus-sign"></i>
+            </t>
+                </p>
+            </div>
+        </div>
+        <% include includes/footer %>

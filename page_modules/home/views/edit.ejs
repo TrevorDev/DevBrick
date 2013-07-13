@@ -1,0 +1,74 @@
+<% include includes/header %>
+<form class="form-signin" method="post" action="/savePage/home" enctype="multipart/form-data">
+    <div style="padding:20px;width:100%;">
+        <button class="btn btn-primary btn-large" style="background-color:#333333;background-color:#222222;" type="submit">
+            Save Page
+        </button>
+        <a href="/dashboard"><button class="btn btn-primary btn-large" style="background-color:#333333;background-color:#222222;" type=button>
+            Back To Dashboard
+        </button></a>
+    </div>
+<div class="container-fluid">
+    <!-- Main hero unit for a primary marketing message or call to action
+    -->
+    <div class="row-fluid">
+        <div class="span8">
+
+            <div class="hero-unit">
+                <h1>
+                    <input type="text" class="input-block-level" placeholder="Title" name="largeTitle" value="<%= pageData.largeTitle %>">
+                </h1>
+                <p>
+                    <input type="text" class="input-block-level" placeholder="Slogan" name="slogan" value="<%= pageData.slogan %>">
+                </p>
+                <p>
+                    <a href="about.php" class="btn btn-primary btn-large">Learn more &raquo;</a>
+                </p>
+            </div>
+
+        </div>
+        <div class="span4">
+            <h2>
+                Upload Logo Image
+            </h2>
+            <input type="file" name="bigLogo" id="file"><br>
+            <label class="checkbox">
+            <input type="checkbox" name="bigLogoBorder"> add picture border
+            </label>
+        </div>
+
+
+    </div>
+    <!-- Example row of columns -->
+    <div class="row-fluid">
+        <div class="span4">
+            <h2>
+                <input type="text" class="input-block-level" placeholder="Block Heading" name="blockHeading1" value="<%= pageData.blockHeading1 %>">
+            </h2>
+            <textarea rows="3" style="-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;width: 100%;resize:vertical;" name="block1"><%= pageData.block1 %></textarea>
+            <p>
+                <a class="btn" href="about.php">View details &raquo;</a>
+            </p>
+        </div>
+        <div class="span4">
+            <h2>
+                <input type="text" class="input-block-level" placeholder="Block Heading" name="blockHeading2" value="<%= pageData.blockHeading2 %>">
+            </h2>
+                <textarea rows="3" style="-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;width: 100%;resize:vertical;" name="block2"><%= pageData.block2 %></textarea>
+            <p>
+                <a class="btn" href="services.php">View details &raquo;</a>
+            </p>
+        </div>
+        <div class="span4">
+            <h2>
+                <input type="text" class="input-block-level" placeholder="Block Heading" name="blockHeading3" value="<%= pageData.blockHeading3 %>">
+            </h2>
+            <textarea rows="3" style="-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;width: 100%;resize:vertical;" name="block3"><%= pageData.block3 %></textarea>
+            <p>
+                <a class="btn" href="contact.php">View details &raquo;</a>
+            </p>
+        </div>
+    </div>
+</div>
+</form>
+<% include includes/footer %>
