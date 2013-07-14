@@ -1,0 +1,5 @@
+### PhPStorm ###
+.idea/
+### ClientFolders ###
+views\clientSites
+public\clientSites
