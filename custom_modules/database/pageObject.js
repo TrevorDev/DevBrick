@@ -7,6 +7,13 @@ var headerInclude = rek('headerInclude.js');
 var menuInclude = rek('menuInclude.js');
 var auth = rek('auth.js');
 
+//Is there a better way to handle this?
+var PAGE_TYPES = [];
+fs.readdir(process.cwd()+'/page_modules',function(err, dir){
+    dir.splice(dir.indexOf('includes'), 1);
+    PAGE_TYPES=dir;
+});
+
 exports.clientGlobal = function() {
 	this.siteName = 'siteName';
 };
@@ -16,6 +23,12 @@ exports.page = function(type, name, icon) {
 	this.displayName = name;
     this.pageIcon = icon;
 };
+
+exports.getPageTypes =function(pre, post){
+    return PAGE_TYPES.map(function(type){
+        return pre+type+post;
+    });
+}
 
 exports.generatePage = function(pageToGen, accEmail, callback) {
 	fs.readFile(process.cwd() + '/page_modules/'+pageToGen.pageType+'/views/page.ejs', function(err, data) {
