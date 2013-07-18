@@ -26,9 +26,26 @@ exports.dbAccount = function(db) {
         for(var i = 0;i<this.pages.length;i++){
             if(this.pages[i].displayName===name){
                 return this.pages[i];
-                break;
             }
         }
+        return false;
+    };
+
+    accountSchema.methods.removePageByDisplayName = function(name){
+        for(var i = 0;i<this.pages.length;i++){
+            if(this.pages[i].displayName===name){
+                this.pages.splice(i,1);
+                return true;
+            }
+        }
+        return false;
+    };
+
+    accountSchema.methods.getAllPageDisplayNames = function(pre,post){
+        var ret = this.pages.map(function(curPage){
+            return pre+curPage.displayName+post;
+        });
+        return ret;
     };
 
     accountSchema.statics.get = function(email, callback) {

@@ -34,8 +34,6 @@ app.use(domainRouter.domainRouter);
 app.use(app.router);
 
 //TODO setup sass/compass(suposed to be best) or stylus
-
-
 database.init(function (err, initDB) {
     db = initDB;
     dbAccount.dbAccount();
@@ -44,6 +42,7 @@ database.init(function (err, initDB) {
     app.post('/login', accountRouter.login);
     app.post('/signUp', accountRouter.signUp);
     app.post('/logout', accountRouter.logout);
+    app.post('/dashboard/addRemovePages/*', accountRouter.addRemovePages);
     app.post(/\/savePage\/([^\/]+)(\/(.+))?/, accountRouter.savePage);
 
     //static requests

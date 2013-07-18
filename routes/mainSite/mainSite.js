@@ -5,6 +5,7 @@ var rek = require('rekuire');
 var auth = rek('auth.js');
 var renderPage = rek('renderPage.js');
 var stringUtil = rek('stringUtil.js');
+var pageHelper = rek('pageObject.js');
 
 exports.editPage = function(req, res, next) {
     if(auth.isLoggedIn(req)){
@@ -33,7 +34,7 @@ exports.dashboard = function(req, res, next) {
         var accSchema = mongoose.model('Account');
         accSchema.get(auth.getEmail(req), function(err, acc){
             res.template.account = acc;
-
+            res.template.pageHelper = pageHelper;
             res.template.editPagesMenu = (acc.pages.map(function(page){
                 return '<li><a href="/editPage/'+page.pageType+'/'+page.displayName+'">'+page.displayName+'</a></li>';
             }).join(''));
