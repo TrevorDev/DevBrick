@@ -19,7 +19,7 @@
                         <a href="/contact">Contact/Support <i class="icon-phone"></i></a>
                     </li>
                     <% if (loggedIn) { %>
-                    <li <% if (page=='dashboard') { %> class="active" <% } %> >
+                    <li <% if (page.indexOf("dashboard") !== -1) { %> class="active" <% } %> >
                         <a href="/dashboard">My Dashboard <i class="icon-dashboard"></i></a>
                     </li>
                     <% } %>
