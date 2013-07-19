@@ -51,6 +51,10 @@ exports.dashboard = function(req, res, next) {
 exports.showMainPage = function(req, res, next) {
 	view = stringUtil.removeTrailingSlash(req.params[0]);
 
+    if (view === '') {
+        view = 'home';
+    }
+
 	var splitPath = view.split('/');
 	if (splitPath[0] === 'dashboard') {
 		if (splitPath.length === 1) {

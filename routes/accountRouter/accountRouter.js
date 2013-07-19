@@ -47,6 +47,15 @@ exports.addRemovePages = function(req, res, next){
                     });
                     break;
                 case 'setHomePage':
+                    acc.homePage=req.body.pageDisplayName;
+                    acc.save(function(err){
+                        page.generateAllPages(acc, function(){
+                            //redirect to dashboard
+                            req.params[0]='dashboard';
+                            req.params[2]='';
+                            mainSite.dashboard(req, res, next);
+                        });
+                    });
                     break;
                 default:
                     //redirect to dashboard
@@ -136,6 +145,7 @@ var createAcc = function(email, password, callback) {
             email: email,
             password: hashedPass,
             domain:'/user/'+email,
+            homePage: home.displayName,
             pages: new Array(home, contact),
             global: new page.clientGlobal()
         });

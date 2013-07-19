@@ -18,6 +18,7 @@ exports.dbAccount = function(db) {
 			unique: true,
 			sparse: true
 		},
+        homePage: String,
 		pages: Array,
         global: mongoose.Schema.Types.Mixed
 	});
