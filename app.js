@@ -46,7 +46,9 @@ database.init(function (err, initDB) {
     app.post(/\/savePage\/([^\/]+)(\/(.+))?/, accountRouter.savePage);
 
     //static requests
-    app.get('/public/*', express.static(__dirname));
+    app.get('/public/*', function(req, res, next){
+        express.static(__dirname)(req, res, function(){next('route')});
+    });
 
     //clientSite requests
     app.get(/\/user\/([^\/]+)(\/(.+))?/, userSite.showClientPage);
@@ -54,7 +56,7 @@ database.init(function (err, initDB) {
     //mainSite requests
     app.get(/\/editPage\/([^\/]+)\/([^\/]+)/, mainSite.editPage);
     app.get(/\/(dashboard(\/([^\/]*))?)/, mainSite.dashboard);
-    app.get('/*', mainSite.showMainPage);
+    app.get('/*', mainSite.default);
     app.listen(3000);
     console.log("Started----------------------");
 });

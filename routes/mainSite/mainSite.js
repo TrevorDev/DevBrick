@@ -48,9 +48,8 @@ exports.dashboard = function(req, res, next) {
     }
 };
 
-exports.test = function(req, res, next) {
-    console.log('hit');
-    console.log(req);
+exports.default = function(req, res, next) {
+    exports.showMainPage(req, res, next);
 }
 
 exports.showMainPage = function(req, res, next) {
