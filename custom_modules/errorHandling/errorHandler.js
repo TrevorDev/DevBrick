@@ -7,7 +7,17 @@ exports.ensureOrRedirectWithErr = function(req, res, next, condition, redirect, 
     if(condition){
         callback();
     }else{
-        res.template.error=err;
-        routingHelper.redirect(req, res, next, redirect);
+        req.session.error=err;
+        res.redirect(redirect);
     }
+}
+
+exports.getAndClearReqErr = function(req){
+     if(req.session.error!=null){
+        var err = req.session.error;
+        delete req.session.error;
+        return err;
+     }else{
+         return undefined;
+     }
 }
