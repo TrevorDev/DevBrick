@@ -48,6 +48,11 @@ exports.dashboard = function(req, res, next) {
     }
 };
 
+exports.test = function(req, res, next) {
+    console.log('hit');
+    console.log(req);
+}
+
 exports.showMainPage = function(req, res, next) {
 	view = stringUtil.removeTrailingSlash(req.params[0]);
 

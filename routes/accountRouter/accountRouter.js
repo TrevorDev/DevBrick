@@ -6,12 +6,14 @@ var cryptoUtil = rek('cryptoUtil.js');
 var page = rek('pageObject.js');
 var mainSite = rek('mainSite.js');
 var auth = rek('auth.js');
+var errHandler = rek('errorHandler.js');
 
 var homePage = rek('homePage.js');
 var contactPage = rek('contactPage.js');
+var routingHelper = rek('routingHelper.js');
 
 exports.addRemovePages = function(req, res, next){
-    if(auth.isLoggedIn(req)){
+    errHandler.ensureOrRedirectWithErr(req, res, next, auth.isLoggedIn(req), '/', 'You must login to modify your pages.', function(){
         var accSchema = mongoose.model('Account');
         accSchema.get(auth.getEmail(req), function(err, acc){
             res.template.account = acc;
@@ -66,17 +68,13 @@ exports.addRemovePages = function(req, res, next){
 
 
         });
-    }else{
-        req.params[0]='';
-        res.template.error='You must login to modify your pages.';
-        mainSite.showMainPage(req, res, next);
-    }
+    });
 }
 
 exports.savePage = function(req, res, next){
     console.log(req.params);
     var pageDisplayNameToSave = req.params[0];
-    if(auth.isLoggedIn(req)){
+    errHandler.ensureOrRedirectWithErr(req, res, next, auth.isLoggedIn(req), '/', 'You must login to modify your pages.', function(){
         var accSchema = mongoose.model('Account');
         accSchema.get(auth.getEmail(req), function(err, acc){
             res.template.account = acc;
@@ -98,11 +96,7 @@ exports.savePage = function(req, res, next){
                 }
             }
         });
-    }else{
-        req.params[0]='';
-        res.template.error='You must login to use the dashboard.';
-        mainSite.showMainPage(req, res, next);
-    }
+    });
 }
 
 exports.login = function(req, res, next){

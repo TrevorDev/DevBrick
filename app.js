@@ -3,7 +3,7 @@ var express = require('express');
 var ejs = require('ejs');
 var app = express();
 var mongoose = require('mongoose');
-
+GLOBAL.GAPP = app;
 //CUSTOM modules
 var rek = require('rekuire');
 var errLog = rek('errorLogger.js');
