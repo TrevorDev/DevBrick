@@ -9,7 +9,7 @@ var pageHelper = rek('pageObject.js');
 var errHandler = rek('errorHandler.js');
 
 exports.editPage = function(req, res, next) {
-    if(auth.isLoggedIn(req)){
+    errHandler.ensureOrRedirectWithErr(req, res, next, auth.isLoggedIn(req), '/', 'You must login to use the dashboard.', function(){
         var accSchema = mongoose.model('Account');
         accSchema.get(auth.getEmail(req), function(err, acc){
             res.template.account = acc;
@@ -19,11 +19,7 @@ exports.editPage = function(req, res, next) {
             res.template.pageData = acc.getPageByDisplayName(req.params[1]);
             renderPage.renderEditPage(req, res, next, req.params[0] , res.template);
         });
-    }else{
-        req.params[0]='';
-        res.template.error='You must login to use the dashboard.';
-        exports.showMainPage(req, res, next);
-    }
+    });
 }
 
 exports.dashboard = function(req, res, next) {

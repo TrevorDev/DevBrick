@@ -31,9 +31,7 @@ exports.addRemovePages = function(req, res, next){
                     acc.save(function(err){
                         page.generateAllPages(acc, function(){
                             //redirect to dashboard
-                            req.params[0]='dashboard';
-                            req.params[2]='';
-                            mainSite.dashboard(req, res, next);
+                            res.redirect('/dashboard/addRemovePages');
                         });
                     });
                     break;
@@ -41,10 +39,7 @@ exports.addRemovePages = function(req, res, next){
                     acc.removePageByDisplayName(req.body.pageDisplayName);
                     acc.save(function(err){
                         page.generateAllPages(acc, function(){
-                            //redirect to dashboard
-                            req.params[0]='dashboard';
-                            req.params[2]='';
-                            mainSite.dashboard(req, res, next);
+                            res.redirect('/dashboard/addRemovePages');
                         });
                     });
                     break;
@@ -52,18 +47,12 @@ exports.addRemovePages = function(req, res, next){
                     acc.homePage=req.body.pageDisplayName;
                     acc.save(function(err){
                         page.generateAllPages(acc, function(){
-                            //redirect to dashboard
-                            req.params[0]='dashboard';
-                            req.params[2]='';
-                            mainSite.dashboard(req, res, next);
+                            res.redirect('/dashboard/addRemovePages');
                         });
                     });
                     break;
                 default:
-                    //redirect to dashboard
-                    req.params[0]='dashboard';
-                    req.params[2]='';
-                    mainSite.dashboard(req, res, next);
+                    res.redirect('/dashboard/addRemovePages');
             }
 
 
@@ -85,10 +74,7 @@ exports.savePage = function(req, res, next){
                         acc.markModified('pages');
                         acc.save(function(err){
                             page.generateAllPages(acc, function(){
-                                //redirect to dashboard
-                                req.params[0]='dashboard';
-                                req.params[2]='';
-                                mainSite.dashboard(req, res, next);
+                                res.redirect('/dashboard/addRemovePages');
                             });
                         });
                     });
@@ -101,25 +87,17 @@ exports.savePage = function(req, res, next){
 
 exports.login = function(req, res, next){
     auth.authenticate(req, function(err) {
-        if(err){
-            res.template.error=err;
-            req.param[1]='';
-            mainSite.showMainPage(req, res, next);
-        }else{
+        errHandler.ensureOrRedirectWithErr(req, res, next, !err, '/', err, function(){
             res.redirect('/dashboard');
-        }
+        });
     });
 }
 
 exports.signUp = function(req, res, next){
     createAcc(req.body.email, req.body.password, function(err) {
-        if(err){
-            res.template.error=err;
-            req.param[1]='';
-            mainSite.showMainPage(req, res, next);
-        }else{
+        errHandler.ensureOrRedirectWithErr(req, res, next, !err, '/', err, function(){
             exports.login(req, res, next);
-        }
+        });
     });
 }
 
