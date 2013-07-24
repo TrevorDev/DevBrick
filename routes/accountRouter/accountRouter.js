@@ -22,24 +22,36 @@ exports.addRemovePages = function(req, res, next){
             switch(req.params[0])
             {
                 case 'addPage':
-                    //TODO error handle
-                    var pageController = rek(req.body.pageType+'Page.js');
-                    var newPage = new pageController.page();
-                    newPage.displayName = req.body.pageDisplayName;
-                    acc.pages.push(newPage);
-                    acc.markModified('pages');
-                    acc.save(function(err){
-                        page.generateAllPages(acc, function(){
-                            //redirect to dashboard
-                            res.redirect('/dashboard/addRemovePages');
+                    errHandler.ensureOrRedirectWithErr(req, res, next, acc.getPageByDisplayName(req.body.pageDisplayName)===false, '/dashboard/addRemovePages', 'A page with that display name already exists.', function(){
+                        var pageController;
+                        try
+                        {
+                            pageController  = rek(req.body.pageType+'Page.js');
+                        }
+                        catch(err)
+                        {
+                            pageController  = rek('home'+'Page.js');
+                        }
+
+                        var newPage = new pageController.page();
+                        newPage.displayName = req.body.pageDisplayName;
+                        acc.pages.push(newPage);
+                        acc.markModified('pages');
+                        acc.save(function(err){
+                            page.generateAllPages(acc, function(){
+                                //redirect to dashboard
+                                res.redirect('/dashboard/addRemovePages');
+                            });
                         });
                     });
                     break;
                 case 'removePage':
-                    acc.removePageByDisplayName(req.body.pageDisplayName);
-                    acc.save(function(err){
-                        page.generateAllPages(acc, function(){
-                            res.redirect('/dashboard/addRemovePages');
+                    errHandler.ensureOrRedirectWithErr(req, res, next, req.body.pageDisplayName!==acc.homePage, '/dashboard/addRemovePages', 'Cannot remove your current homepage. Please select a new homepage below and try deleting again.', function(){
+                        acc.removePageByDisplayName(req.body.pageDisplayName);
+                        acc.save(function(err){
+                            page.generateAllPages(acc, function(){
+                                res.redirect('/dashboard/addRemovePages');
+                            });
                         });
                     });
                     break;
