@@ -73,7 +73,6 @@ exports.addRemovePages = function(req, res, next){
 }
 
 exports.savePage = function(req, res, next){
-    console.log(req.params);
     var pageDisplayNameToSave = req.params[0];
     errHandler.ensureOrRedirectWithErr(req, res, next, auth.isLoggedIn(req), '/', 'You must login to modify your pages.', function(){
         var accSchema = mongoose.model('Account');
@@ -85,8 +84,10 @@ exports.savePage = function(req, res, next){
                     pageController.save(req, acc.pages[i], function(){
                         acc.markModified('pages');
                         acc.save(function(err){
-                            page.generateAllPages(acc, function(){
-                                res.redirect('/dashboard/addRemovePages');
+                            pageController.prepareForHtml(acc.pages[i], function(){
+                                page.generateAllPages(acc, function(){
+                                    res.redirect('/dashboard');
+                                });
                             });
                         });
                     });

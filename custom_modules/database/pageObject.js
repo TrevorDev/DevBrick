@@ -73,7 +73,7 @@ exports.generateAllPages = function(acc, callback) {
 };
 
 exports.saveImg = function(req, img, dbPage, name, callback){
-    if(img){
+    if(img&&img.name!==''){
         fs.readFile(img.path, function (err, data) {
             var appPath = "/public/clientSites/"+auth.getEmail(req)+"/"+dbPage.displayName+"_"+name+"_"+img.name
             var sysPath = process.cwd() + appPath;

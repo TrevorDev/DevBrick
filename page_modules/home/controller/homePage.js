@@ -1,5 +1,6 @@
 var rek = require('rekuire');
 var pageObject = rek('pageObject.js');
+var stringUtil = rek('stringUtil.js');
 var auth = rek('auth.js');
 var fs = require('fs');
 
@@ -8,15 +9,15 @@ exports.page = function() {
     this.largeTitle = 'large title';
     this.slogan = 'your slogan';
     this.largeButton = 'home';
-    this.bigLogo = '';
+    this.bigLogo = '/public/assets/custom/img/star.png';
 
-    this.blockHeading1='heading';
-    this.blockHeading2='heading';
-    this.blockHeading3='heading';
+    this.blockHeading1='Service 1';
+    this.blockHeading2='Service 2';
+    this.blockHeading3='Store Hours';
 
-    this.block1='block text';
-    this.block2='block text';
-    this.block3='block text';
+    this.block1='Service description';
+    this.block2='Service description';
+    this.block3='Phone: (123) 456-7890\nHours:\nMon-Fri: 9am-5pm\nWeekends: 11am-8pm\n';
 };
 
 exports.save = function(req, dbPage, callback) {
@@ -32,8 +33,16 @@ exports.save = function(req, dbPage, callback) {
     dbPage.blockHeading3 = req.body.blockHeading3;
 
     pageObject.saveImg(req, req.files.bigLogo, dbPage, 'bigLogo', function(fileLocation, err){
-        dbPage.bigLogo=fileLocation;
+        if(fileLocation!==''){
+            dbPage.bigLogo=fileLocation;
+        }
         callback(err);
     });
 }
 
+exports.prepareForHtml = function(dbPage, callback) {
+    dbPage.block1 = stringUtil.replaceNewlineWithBR(dbPage.block1);
+    dbPage.block2 = stringUtil.replaceNewlineWithBR(dbPage.block2);
+    dbPage.block3 = stringUtil.replaceNewlineWithBR(dbPage.block3);
+    callback();
+}

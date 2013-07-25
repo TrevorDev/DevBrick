@@ -7,3 +7,7 @@ exports.removeTrailingSlash = function(view) {
     }
     return view;
 };
+
+exports.replaceNewlineWithBR = function (str){
+    return str.replace(/\n/g, '<br>');
+}
