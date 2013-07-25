@@ -13,11 +13,11 @@ exports.page = function() {
 
     this.blockHeading1='Service 1';
     this.blockHeading2='Service 2';
-    this.blockHeading3='Store Hours';
+    this.blockHeading3='Store Info';
 
     this.block1='Service description';
     this.block2='Service description';
-    this.block3='Phone: (123) 456-7890\nHours:\nMon-Fri: 9am-5pm\nWeekends: 11am-8pm\n';
+    this.block3='Phone: (123) 456-7890\n\nHours:\nMon-Fri: 9am-5pm\nWeekends: 11am-8pm\n';
 };
 
 exports.save = function(req, dbPage, callback) {
