@@ -1,0 +1,42 @@
+<% include ../includes/dashboardHeader %>
+            <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <% include ../includes/dashboardMenu %>
+        </div><!--/span-->
+        <div class="span9">
+          <div class="hero-unit">
+            <h1>General</h1>
+              <% if (typeof(error) !== 'undefined') { %>
+              <div class="alert">
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                  <strong>Warning!</strong> <%= error %>
+              </div>
+              <%}%>
+              <br>
+              <div class="container-fluid">
+                  <div class="row-fluid">
+                      <div class="span6">
+                          <h5>Site Name</h5>
+                          <form method="post" action="/dashboard/generalSiteSettings/saveSiteName">
+                              <input type="text" placeholder="Site Name" name='siteName' value='<%= account.global.siteName %>'><br>
+                              <button class="btn" type="submit">Save Name <i class="icon-flag"></i></button>
+                          </form>
+                      </div>
+                      <div class="span6">
+                          <h5>Mini Logo</h5>
+                      </div>
+                  </div>
+                  <br>
+                  <div class="row-fluid">
+                      <div class="span6">
+                          <h3>Your Domain Name</h3>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div><!--/row-->
+    </div><!--/span-->
+  </div><!--/row-->
+    </div>
+    <% include ../includes/footer %>

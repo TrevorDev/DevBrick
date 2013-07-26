@@ -43,6 +43,7 @@ database.init(function (err, initDB) {
     app.post('/signUp', accountRouter.signUp);
     app.post('/logout', accountRouter.logout);
     app.post('/dashboard/addRemovePages/*', accountRouter.addRemovePages);
+    app.post('/dashboard/generalSiteSettings/*', accountRouter.saveSiteName);
     app.post(/\/savePage\/([^\/]+)(\/(.+))?/, accountRouter.savePage);
 
     //static requests

@@ -12,6 +12,32 @@ var homePage = rek('homePage.js');
 var contactPage = rek('contactPage.js');
 var routingHelper = rek('routingHelper.js');
 
+exports.saveSiteName = function(req, res, next){
+    errHandler.ensureOrRedirectWithErr(req, res, next, auth.isLoggedIn(req), '/', 'You must login to modify your pages.', function(){
+        var accSchema = mongoose.model('Account');
+        accSchema.get(auth.getEmail(req), function(err, acc){
+            res.template.account = acc;
+
+
+            switch(req.params[0])
+            {
+                case 'saveSiteName':
+                    acc.global.siteName = req.body.siteName;
+                    acc.markModified('global');
+                    acc.save(function(err){
+                        page.generateAllPages(acc, function(){
+                            //redirect to dashboard
+                            res.redirect('/dashboard/generalSiteSettings');
+                        });
+                    });
+                    break;
+                default:
+                    res.redirect('/generalSiteSettings');
+            }
+        });
+    });
+}
+
 exports.addRemovePages = function(req, res, next){
     errHandler.ensureOrRedirectWithErr(req, res, next, auth.isLoggedIn(req), '/', 'You must login to modify your pages.', function(){
         var accSchema = mongoose.model('Account');
