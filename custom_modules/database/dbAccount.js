@@ -4,6 +4,7 @@ var bcrypt = require('bcrypt');
 var rek = require('rekuire');
 var page = rek('pageObject.js');
 var mainSite = rek('mainSite.js');
+var fileSystem = rek('fileSystem.js');
 
 exports.dbAccount = function(db) {
 	var accountSchema = mongoose.Schema({
