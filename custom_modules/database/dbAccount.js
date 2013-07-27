@@ -75,7 +75,14 @@ exports.dbAccount = function(db) {
         });
     };
     accountSchema.statics.removeAll = function() {
-        this.remove(function(err) {});
+        var thisHolder = this;
+        fileSystem.removeRecursive(process.cwd() + '/public/clientSites',function(){
+            fileSystem.removeRecursive(process.cwd() + '/views/clientSites',function(){
+                thisHolder.remove(function(err) {
+                    //TODO make callback???
+                });
+            });
+        });
     };
 
 	var accountModel = mongoose.model('Account', accountSchema);

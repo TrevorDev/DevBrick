@@ -38,6 +38,10 @@ database.init(function (err, initDB) {
     db = initDB;
     dbAccount.dbAccount();
 
+    //DANGER DELETES ALL ACCOUNTS
+    //mongoose.model('Account').removeAll();
+
+
     //posts requests
     app.post('/login', accountRouter.login);
     app.post('/signUp', accountRouter.signUp);
