@@ -30,7 +30,28 @@ exports.getPageTypes =function(pre, post){
     });
 }
 
+exports.getPageController = function(pageType){
+    var pageController = false;
+    try
+    {
+        pageController  = rek(pageType+'Page.js');
+    }
+    catch(err)
+    {
+        pageController  = false;
+    }
+    finally {
+        return pageController;
+    }
+}
+
 exports.generatePage = function(pageToGen, accEmail, callback) {
+    var pageController = exports.getPageController(pageToGen.pageType);
+    if(pageController!==false){
+        if(pageController.prepareForHtml){
+            pageController.prepareForHtml(pageToGen);
+        }
+    }
 	fs.readFile(process.cwd() + '/page_modules/'+pageToGen.pageType+'/views/page.ejs', function(err, data) {
 		var pageString = data.toString('utf8');
 		pageToGen.filename = process.cwd() + '/views/clientSites/' + accEmail + '/' + pageToGen.displayName + '.ejs';

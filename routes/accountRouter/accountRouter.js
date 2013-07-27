@@ -49,24 +49,17 @@ exports.addRemovePages = function(req, res, next){
             {
                 case 'addPage':
                     errHandler.ensureOrRedirectWithErr(req, res, next, acc.getPageByDisplayName(req.body.pageDisplayName)===false, '/dashboard/addRemovePages', 'A page with that display name already exists.', function(){
-                        var pageController;
-                        try
-                        {
-                            pageController  = rek(req.body.pageType+'Page.js');
-                        }
-                        catch(err)
-                        {
-                            pageController  = rek('home'+'Page.js');
-                        }
-
-                        var newPage = new pageController.page();
-                        newPage.displayName = req.body.pageDisplayName;
-                        acc.pages.push(newPage);
-                        acc.markModified('pages');
-                        acc.save(function(err){
-                            page.generateAllPages(acc, function(){
-                                //redirect to dashboard
-                                res.redirect('/dashboard/addRemovePages');
+                        var pageController = page.getPageController(req.body.pageType);
+                        errHandler.ensureOrRedirectWithErr(req, res, next, pageController!==false, '/dashboard/addRemovePages', 'Unable to create page of that type.', function(){
+                            var newPage = new pageController.page();
+                            newPage.displayName = req.body.pageDisplayName;
+                            acc.pages.push(newPage);
+                            acc.markModified('pages');
+                            acc.save(function(err){
+                                page.generateAllPages(acc, function(){
+                                    //redirect to dashboard
+                                    res.redirect('/dashboard/addRemovePages');
+                                });
                             });
                         });
                     });
@@ -106,14 +99,12 @@ exports.savePage = function(req, res, next){
             res.template.account = acc;
             for(var i=0;i<acc.pages.length;i++){
                 if(acc.pages[i].displayName===pageDisplayNameToSave){
-                    var pageController = rek(acc.pages[i].pageType+'Page.js');
+                    var pageController = page.getPageController(acc.pages[i].pageType);
                     pageController.save(req, acc.pages[i], function(){
                         acc.markModified('pages');
                         acc.save(function(err){
-                            pageController.prepareForHtml(acc.pages[i], function(){
-                                page.generateAllPages(acc, function(){
-                                    res.redirect('/dashboard');
-                                });
+                            page.generateAllPages(acc, function(){
+                                res.redirect('/dashboard');
                             });
                         });
                     });

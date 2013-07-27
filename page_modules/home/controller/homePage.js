@@ -40,9 +40,8 @@ exports.save = function(req, dbPage, callback) {
     });
 }
 
-exports.prepareForHtml = function(dbPage, callback) {
+exports.prepareForHtml = function(dbPage) {
     dbPage.block1 = stringUtil.replaceNewlineWithBR(dbPage.block1);
     dbPage.block2 = stringUtil.replaceNewlineWithBR(dbPage.block2);
     dbPage.block3 = stringUtil.replaceNewlineWithBR(dbPage.block3);
-    callback();
 }
