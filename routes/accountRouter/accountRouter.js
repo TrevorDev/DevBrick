@@ -160,11 +160,15 @@ var createAcc = function(email, password, callback) {
                 callback(err);
             }else{
                 //create folders then generate all pages
-                fs.mkdir(process.cwd() + '/public/clientSites/' + email, function() {
-                    fs.mkdir(process.cwd() + '/views/clientSites/' + email, function() {
-                        fs.mkdir(process.cwd() + '/views/clientSites/' + email+'/includes', function() {
-                            page.generateAllPages(newAcc, function() {
-                                callback(null);
+                fs.mkdir(process.cwd() + '/public/clientSites', function() {
+                    fs.mkdir(process.cwd() + '/views/clientSites', function() {
+                        fs.mkdir(process.cwd() + '/public/clientSites/' + email, function() {
+                            fs.mkdir(process.cwd() + '/views/clientSites/' + email, function() {
+                                fs.mkdir(process.cwd() + '/views/clientSites/' + email+'/includes', function() {
+                                    page.generateAllPages(newAcc, function() {
+                                        callback(null);
+                                    });
+                                });
                             });
                         });
                     });
