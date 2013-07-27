@@ -58,6 +58,6 @@ database.init(function (err, initDB) {
     app.get(/\/editPage\/([^\/]+)\/([^\/]+)/, mainSite.editPage);
     app.get(/\/(dashboard(\/([^\/]*))?)/, mainSite.dashboard);
     app.get('/*', mainSite.default);
-    app.listen(3000);
+    app.listen(80);
     console.log("Started----------------------");
 });
