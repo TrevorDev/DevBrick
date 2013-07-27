@@ -1,6 +1,9 @@
 ### PhPStorm ###
 .idea/
 ### ClientFolders ###
-views/clientSites
-public/clientSites
+views/clientSites/*
+public/clientSites/*
 node_modules/
+### Dont Ignore Folders ###
+!views/clientSites/dontGitIgnoreFolder
+!public/clientSites/dontGitIgnoreFolder
