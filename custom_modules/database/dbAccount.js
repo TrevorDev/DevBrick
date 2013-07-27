@@ -36,7 +36,9 @@ exports.dbAccount = function(db) {
         for(var i = 0;i<this.pages.length;i++){
             if(this.pages[i].displayName===name){
                 this.pages.splice(i,1);
-                return true;
+                page.deletePage(name, this.email, function(){
+                    return true;
+                });
             }
         }
         return false;

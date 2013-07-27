@@ -48,17 +48,19 @@ exports.addRemovePages = function(req, res, next){
             switch(req.params[0])
             {
                 case 'addPage':
-                    errHandler.ensureOrRedirectWithErr(req, res, next, acc.getPageByDisplayName(req.body.pageDisplayName)===false, '/dashboard/addRemovePages', 'A page with that display name already exists.', function(){
-                        var pageController = page.getPageController(req.body.pageType);
-                        errHandler.ensureOrRedirectWithErr(req, res, next, pageController!==false, '/dashboard/addRemovePages', 'Unable to create page of that type.', function(){
-                            var newPage = new pageController.page();
-                            newPage.displayName = req.body.pageDisplayName;
-                            acc.pages.push(newPage);
-                            acc.markModified('pages');
-                            acc.save(function(err){
-                                page.generateAllPages(acc, function(){
-                                    //redirect to dashboard
-                                    res.redirect('/dashboard/addRemovePages');
+                    errHandler.ensureOrRedirectWithErr(req, res, next, req.body.pageDisplayName!=='', '/dashboard/addRemovePages', 'Page name cannot be blank.', function(){
+                        errHandler.ensureOrRedirectWithErr(req, res, next, acc.getPageByDisplayName(req.body.pageDisplayName)===false, '/dashboard/addRemovePages', 'A page with that display name already exists.', function(){
+                            var pageController = page.getPageController(req.body.pageType);
+                            errHandler.ensureOrRedirectWithErr(req, res, next, pageController!==false, '/dashboard/addRemovePages', 'Unable to create page of that type.', function(){
+                                var newPage = new pageController.page();
+                                newPage.displayName = req.body.pageDisplayName;
+                                acc.pages.push(newPage);
+                                acc.markModified('pages');
+                                acc.save(function(err){
+                                    page.generateAllPages(acc, function(){
+                                        //redirect to dashboard
+                                        res.redirect('/dashboard/addRemovePages');
+                                    });
                                 });
                             });
                         });

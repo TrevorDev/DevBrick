@@ -45,6 +45,13 @@ exports.getPageController = function(pageType){
     }
 }
 
+exports.deletePage = function(pageName, accEmail, callback) {
+    fs.unlink(process.cwd() + '/views/clientSites/' + accEmail + '/' + pageName + '.ejs', function (err) {
+        console.log(err);
+        callback(err);
+    });
+}
+
 exports.generatePage = function(pageToGen, accEmail, callback) {
     var pageController = exports.getPageController(pageToGen.pageType);
     if(pageController!==false){
