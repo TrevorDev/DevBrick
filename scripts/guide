@@ -1,0 +1,24 @@
+#START GUIDE
+#Make yourself su by running sudo su
+#Add sudo su to the bottom of .bashrc found at ~/
+#once in su add source ~/.nvm/nvm.sh to the bottom of su .bashrc at ~/
+
+apt-get install git
+apt-get install vim
+apt-get install curl
+curl https://raw.github.com/creationix/nvm/master/install.sh | sh
+apt-get install build-essential
+apt-get install sshpass
+
+#Below commands require to be run in terminal
+#nvm install 0.10.15
+#nvm alias default 0.10.15
+
+#SETUP GIT ALIAS
+
+#make folder /workspace
+
+#get devbrick repo
+#git clone https://github.com/TrevorDev/DevBrick.git
+#cd DevBrick
+#npm install
