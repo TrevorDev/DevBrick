@@ -9,7 +9,7 @@ var auth = rek('auth.js');
 var errHandler = rek('errorHandler.js');
 
 var homePage = rek('homePage.js');
-var contactPage = rek('contactPage.js');
+//var contactPage = rek('contactPage.js');
 var routingHelper = rek('routingHelper.js');
 
 exports.saveSiteName = function(req, res, next){
@@ -143,14 +143,14 @@ var createAcc = function(email, password, callback) {
     cryptoUtil.crypt(password, function(hashedPass){
         // Store hash in your password DB.
         var home = new homePage.page();
-        var contact = new contactPage.page();
+        //var contact = new contactPage.page();
         var accSchema = mongoose.model('Account');
         var newAcc = new accSchema({
             email: email,
             password: hashedPass,
             domain:'/user/'+email,
             homePage: home.displayName,
-            pages: new Array(home, contact),
+            pages: new Array(home),
             global: new page.clientGlobal()
         });
 
