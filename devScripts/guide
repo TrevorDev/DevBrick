@@ -5,6 +5,9 @@
 
 apt-get install git
 apt-get install vim
+#VIM PLUGINS
+#pathogen.vim plugin manager
+#nerdtree  node  vim-javascript  vim-mustang
 apt-get install curl
 curl https://raw.github.com/creationix/nvm/master/install.sh | sh
 apt-get install build-essential
