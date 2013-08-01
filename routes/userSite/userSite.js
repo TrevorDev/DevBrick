@@ -16,10 +16,10 @@ exports.showClientPage = function(req, res, next) {
             view = acc.homePage;
             //TODO make this a function?
             res.template.page = view;
-            renderPage.render(req, res, next, 'clientSites/'+ email +'/'+ view, res.template);
+            renderPage.render(req, res, next, 'clientSites/'+ email +'/'+ view);
         });
     }else{
         res.template.page = view;
-        renderPage.render(req, res, next, 'clientSites/'+ email +'/'+ view, res.template);
+        renderPage.render(req, res, next, 'clientSites/'+ email +'/'+ view);
     }
 };

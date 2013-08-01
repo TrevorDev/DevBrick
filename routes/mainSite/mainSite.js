@@ -17,7 +17,7 @@ exports.editPage = function(req, res, next) {
             res.template.loggedIn = auth.isLoggedIn(req);
             res.template.email = auth.getEmail(req);
             res.template.pageData = acc.getPageByDisplayName(req.params[1]);
-            renderPage.renderEditPage(req, res, next, req.params[0] , res.template);
+            renderPage.renderEditPage(req, res, next, req.params[0]);
         });
     });
 }
@@ -51,15 +51,9 @@ exports.showMainPage = function(req, res, next) {
         view = 'home';
     }
 
-	var splitPath = view.split('/');
-	if (splitPath[0] === 'dashboard') {
-		if (splitPath.length === 1) {
-			splitPath[1] = 'account';
-		}
-	}
     res.template.error = errHandler.getAndClearReqErr(req);
     res.template.page = view;
     res.template.loggedIn = auth.isLoggedIn(req);
     res.template.email = auth.getEmail(req);
-    renderPage.render(req, res, next, 'mainSite/' + view, res.template);
+    renderPage.render(req, res, next, 'mainSite/' + view);
 };
