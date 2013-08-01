@@ -35,7 +35,7 @@ app.use(app.router);
 
 //TODO setup sass/compass(suposed to be best) or stylus
 database.init(function (err, initDB) {
-    db = initDB;
+	db = initDB;
     dbAccount.dbAccount();
 
     //DANGER DELETES ALL ACCOUNTS
@@ -64,4 +64,12 @@ database.init(function (err, initDB) {
     app.get('/*', mainSite.default);
     app.listen(80);
     console.log("Started----------------------");
+	process.argv.forEach(function (val, index, array) {
+		  if(index==2){
+			  if(val=="testAll"){
+				var testSuite = rek('testSuite.js');		
+				testSuite.runDir('/tests/acceptance');
+			  }
+		  }
+	});
 });
