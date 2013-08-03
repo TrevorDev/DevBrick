@@ -64,6 +64,8 @@ database.init(function (err, initDB) {
     app.get('/*', mainSite.default);
     app.listen(80);
     console.log("Started----------------------");
+
+    //EXECUTE TESTS
 	process.argv.forEach(function (val, index, array) {
 		  if(index==2){
 			  if(val=="testAll"){
@@ -72,4 +74,5 @@ database.init(function (err, initDB) {
 			  }
 		  }
 	});
+
 });
