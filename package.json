@@ -16,6 +16,8 @@
 		"underscore": "x.x",
 		"rekuire": "x.x",
 		"crypto": "x.x",
-		"ejs": "x.x"
+		"ejs": "x.x",
+		"zombie": "x.x",
+		"stripe": "x.x"
 	}
 }
