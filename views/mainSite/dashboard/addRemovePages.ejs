@@ -29,7 +29,7 @@
                       <div class="span6">
                           <h5>Your current pages</h5>
                           <form method="post" action="/dashboard/addRemovePages/removePage">
-                              <select name='pageDisplayName'>
+                              <select id="pageDisplayNameToDelete" name='pageDisplayName'>
                                   <%- account.getAllPageDisplayNames('<option>','</option>').join('') %>
                               </select><br><br>
                               <button class="btn" type="submit">Delete Page <i class="icon-trash"></i></button>

@@ -9,7 +9,17 @@ exports.runTest = function(callback){
 	loginHelper.login(browser, function(){
 		browser.clickLink("Add or Remove Pages", function() {
 			assert.equal(browser.location.pathname, "/dashboard/addRemovePages");
-			callback();
+			browser.fill("pageDisplayName", "testHome").
+			select("pageType","home").
+			pressButton("Add Page", function() {
+				assert.ok(browser.html().indexOf("testHome")!= -1);
+				browser.
+				select("#pageDisplayNameToDelete","testHome").
+				pressButton("Delete Page", function() {
+					assert.ok(browser.html().indexOf("testHome")== -1);
+					callback();
+				});
+			});
 		});
 	});
 }
