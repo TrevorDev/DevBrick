@@ -117,6 +117,7 @@ exports.savePage = function(req, res, next){
     });
 }
 
+//TODO fix wrong error message
 exports.login = function(req, res, next){
     auth.authenticate(req, function(err) {
         errHandler.ensureOrRedirectWithErr(req, res, next, !err, '/', err, function(){

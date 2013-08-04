@@ -24,6 +24,13 @@ exports.dbAccount = function(db) {
         global: mongoose.Schema.Types.Mixed
 	});
 
+    accountSchema.methods.getAccountData = function(){
+        var accountData = {};
+        accountData.domain=this.domain;
+        accountData.siteName=this.global.siteName;
+        return accountData;
+    };
+
     accountSchema.methods.getPageByDisplayName = function(name){
         for(var i = 0;i<this.pages.length;i++){
             if(this.pages[i].displayName===name){

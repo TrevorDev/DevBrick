@@ -9,22 +9,22 @@
             <a class="brand" href="/"><img class="picDisplay" src="/public/mainSite/assets/img/brick2.svg" width="20px" type="image/svg+xml"/>&nbsp;&nbsp;Dev Brick</a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li <% if (page=='home') { %> class="active" <% } %> >
+                    <li <% if (displayData.view=='home') { %> class="active" <% } %> >
                         <a href="/">Home <i class="icon-home"></i></a>
                     </li>
-                    <li <% if (page=='plans') { %> class="active" <% } %> >
+                    <li <% if (displayData.view=='plans') { %> class="active" <% } %> >
                         <a href="/plans">Plans <i class="icon-shopping-cart"></i></a>
                     </li>
-                    <li <% if (page=='contact') { %> class="active" <% } %> >
+                    <li <% if (displayData.view=='contact') { %> class="active" <% } %> >
                         <a href="/contact">Contact/Support <i class="icon-phone"></i></a>
                     </li>
-                    <% if (loggedIn) { %>
-                    <li <% if (page.indexOf("dashboard") !== -1) { %> class="active" <% } %> >
+                    <% if (sessionData.loggedIn) { %>
+                    <li <% if (displayData.view.indexOf("dashboard") !== -1) { %> class="active" <% } %> >
                         <a href="/dashboard">My Dashboard <i class="icon-dashboard"></i></a>
                     </li>
                     <% } %>
                 </ul>
-                <% if (!loggedIn) { %>
+                <% if (!sessionData.loggedIn) { %>
                  <form class="form-search navbar-form pull-right" method="post" action="/login">
                   
                     <div class="input-prepend">
@@ -41,7 +41,7 @@
                 </form>
                  <% } else { %>
                  <form class="form-search navbar-form pull-right" method="post" action="/logout">
-                  <p class='muted' style='display: inline;'>Logged in as <%= email %></p>
+                  <p class='muted' style='display: inline;'>Logged in as <%= sessionData.email %></p>
                   <button type="submit" class="btn">Logout</button>
                 </form>
 

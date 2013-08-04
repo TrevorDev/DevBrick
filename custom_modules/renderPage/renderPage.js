@@ -16,7 +16,7 @@ exports.renderEditPage = function(req, res, next, page) {
         if(!err){
             var pageString = data.toString('utf8');
             //set filename to a made up page to be used as the reference for ejs
-            res.template.filename = process.cwd() + '/views/clientSites/'+res.template.email+'/ref.ejs';
+            res.template.filename = process.cwd() + '/views/clientSites/'+res.template.sessionData.email+'/ref.ejs';
             res.send(ejs.render(pageString, res.template));
         }else{
             next();

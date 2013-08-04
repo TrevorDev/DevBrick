@@ -6,10 +6,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="<@= homePageUrl @>"><!--<img class="picDisplay" src="/public/mainSite/assets/img/brick2.svg" width="20px" type="image/svg+xml"/>&nbsp;&nbsp;--><@= siteName @></a>
+            <a class="brand" href="<@= pageData.homePageUrl @>"><!--<img class="picDisplay" src="/public/mainSite/assets/img/brick2.svg" width="20px" type="image/svg+xml"/>&nbsp;&nbsp;--><@= pageData.siteName @></a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <@- pages @>
+                    <@- pageData.pages @>
                 </ul>
                 
             </div>

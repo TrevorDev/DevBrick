@@ -12,11 +12,11 @@ exports.editPage = function(req, res, next) {
     errHandler.ensureOrRedirectWithErr(req, res, next, auth.isLoggedIn(req), '/', 'You must login to use the dashboard.', function(){
         var accSchema = mongoose.model('Account');
         accSchema.get(auth.getEmail(req), function(err, acc){
-            res.template.account = acc;
-            res.template.displayName = '';
-            res.template.loggedIn = auth.isLoggedIn(req);
-            res.template.email = auth.getEmail(req);
+
+            res.template.sessionData = auth.getSessionData(req);
+
             res.template.pageData = acc.getPageByDisplayName(req.params[1]);
+            
             renderPage.renderEditPage(req, res, next, req.params[0]);
         });
     });
@@ -29,11 +29,16 @@ exports.dashboard = function(req, res, next) {
     errHandler.ensureOrRedirectWithErr(req, res, next, auth.isLoggedIn(req), '/', 'You must login to use the dashboard.', function(){
         var accSchema = mongoose.model('Account');
         accSchema.get(auth.getEmail(req), function(err, acc){
-            res.template.account = acc;
-            res.template.pageHelper = pageHelper;
-            res.template.editPagesMenu = (acc.pages.map(function(page){
+            res.template.accountData=acc.getAccountData();
+
+            res.template.pageData = {};
+            res.template.pageData.editPagesMenu = (acc.pages.map(function(page){
                 return '<li><a href="/editPage/'+page.pageType+'/'+page.displayName+'">'+page.displayName+'</a></li>';
             }).join(''));
+            if(req.params[2]=='addRemovePages'){
+                res.template.pageData.pageTypes = pageHelper.getPageTypes('<option>','</option>').join('');
+                res.template.pageData.allPageDisplayNames = acc.getAllPageDisplayNames('<option>','</option>').join('');
+            }
 
             exports.showMainPage(req, res, next);
         });
@@ -52,8 +57,10 @@ exports.showMainPage = function(req, res, next) {
     }
 
     res.template.error = errHandler.getAndClearReqErr(req);
-    res.template.page = view;
-    res.template.loggedIn = auth.isLoggedIn(req);
-    res.template.email = auth.getEmail(req);
+
+    res.template.displayData={};
+    res.template.displayData.view = view;
+
+    res.template.sessionData = auth.getSessionData(req);
     renderPage.render(req, res, next, 'mainSite/' + view);
 };

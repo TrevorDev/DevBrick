@@ -47,7 +47,6 @@ exports.getPageController = function(pageType){
 
 exports.deletePage = function(pageName, accEmail, callback) {
     fs.unlink(process.cwd() + '/views/clientSites/' + accEmail + '/' + pageName + '.ejs', function (err) {
-        console.log(err);
         callback(err);
     });
 }
@@ -61,16 +60,22 @@ exports.generatePage = function(pageToGen, accEmail, callback) {
     }
 	fs.readFile(process.cwd() + '/page_modules/'+pageToGen.pageType+'/views/page.ejs', function(err, data) {
 		var pageString = data.toString('utf8');
-		pageToGen.filename = process.cwd() + '/views/clientSites/' + accEmail + '/' + pageToGen.displayName + '.ejs';
-		compileAndWriteEJS(pageString,pageToGen, function() {
+        var options = {};
+		options.filename = process.cwd() + '/views/clientSites/' + accEmail + '/' + pageToGen.displayName + '.ejs';
+        options.pageData = pageToGen;
+        if(pageToGen.open && pageToGen.close){
+            options.open = pageToGen.open;
+            options.close = pageToGen.close;
+        }
+		compileAndWriteEJS(pageString,options, function() {
 			callback(err);
 		});
 	});
 };
 
-var compileAndWriteEJS = function(pageString, pageToGen, callback) {
-	var newFile = ejs.render(pageString, pageToGen);
-	fs.writeFile(pageToGen.filename, newFile, function(err) {
+var compileAndWriteEJS = function(pageString, options, callback) {
+	var newFile = ejs.render(pageString, options);
+	fs.writeFile(options.filename, newFile, function(err) {
 		callback(err);
 	});
 };

@@ -30,3 +30,10 @@ exports.getToken = function(callback) {
 exports.getEmail = function(req) {
 	return (req.session.email);
 }
+
+exports.getSessionData = function(req){
+	var sessionData = {};
+    sessionData.loggedIn = exports.isLoggedIn(req);
+    sessionData.email = exports.getEmail(req);
+    return sessionData;
+}

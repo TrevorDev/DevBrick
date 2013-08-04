@@ -20,7 +20,7 @@
                           <h5>Page to add</h5>
                           <form method="post" action="/dashboard/addRemovePages/addPage">
                               <select name='pageType'>
-                                  <%- pageHelper.getPageTypes('<option>','</option>').join('') %>
+                                  <%- pageData.pageTypes %>
                               </select><br>
                               <input type="text" placeholder="Name of new page" name='pageDisplayName'><br>
                               <button class="btn" type="submit">Add Page <i class="icon-plus"></i></button>
@@ -30,7 +30,7 @@
                           <h5>Your current pages</h5>
                           <form method="post" action="/dashboard/addRemovePages/removePage">
                               <select id="pageDisplayNameToDelete" name='pageDisplayName'>
-                                  <%- account.getAllPageDisplayNames('<option>','</option>').join('') %>
+                                  <%- pageData.allPageDisplayNames %>
                               </select><br><br>
                               <button class="btn" type="submit">Delete Page <i class="icon-trash"></i></button>
                           </form>
@@ -42,7 +42,7 @@
                           <h3>Choose your homepage</h3>
                           <form method="post" action="/dashboard/addRemovePages/setHomePage">
                               <select name='pageDisplayName'>
-                                  <%- account.getAllPageDisplayNames('<option>','</option>').join('') %>
+                                  <%- pageData.allPageDisplayNames %>
                               </select><br>
                               <button class="btn" type="submit">Set Homepage <i class="icon-home"></i></button>
                           </form>
