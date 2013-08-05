@@ -90,8 +90,8 @@ exports.generateAllPages = function(acc, callback) {
 	};
 
 	var menu = new menuInclude.page(acc);
-	var bottom = new footerInclude.page();
-	var header = new headerInclude.page();
+	var bottom = new footerInclude.page(acc);
+	var header = new headerInclude.page(acc);
 
 	pageObject.generatePage(menu, acc.email, function() {
 		pageObject.generatePage(bottom, acc.email, function() {
