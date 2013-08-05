@@ -7,11 +7,15 @@ var renderPage = rek('renderPage.js');
 var stringUtil = rek('stringUtil.js');
 var pageHelper = rek('pageObject.js');
 var errHandler = rek('errorHandler.js');
+var editHtmlHelper = rek('editHtmlHelper.js');
 
 exports.editPage = function(req, res, next) {
     errHandler.ensureOrRedirectWithErr(req, res, next, auth.isLoggedIn(req), '/', 'You must login to use the dashboard.', function(){
         var accSchema = mongoose.model('Account');
         accSchema.get(auth.getEmail(req), function(err, acc){
+            
+            res.template.libs = {};
+            res.template.libs.editHtmlHelper=editHtmlHelper;
 
             res.template.sessionData = auth.getSessionData(req);
 

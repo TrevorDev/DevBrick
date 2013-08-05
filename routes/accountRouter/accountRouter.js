@@ -102,11 +102,14 @@ exports.savePage = function(req, res, next){
             for(var i=0;i<acc.pages.length;i++){
                 if(acc.pages[i].displayName===pageDisplayNameToSave){
                     var pageController = page.getPageController(acc.pages[i].pageType);
-                    pageController.save(req, acc.pages[i], function(){
+                    pageController.save(req, res, acc.pages[i], function(redirect){
+                        if(!redirect){
+                            redirect='/dashboard';
+                        }
                         acc.markModified('pages');
                         acc.save(function(err){
                             page.generateAllPages(acc, function(){
-                                res.redirect('/dashboard');
+                                res.redirect(redirect);
                             });
                         });
                     });

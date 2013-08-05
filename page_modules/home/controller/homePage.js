@@ -20,7 +20,7 @@ exports.page = function() {
     this.block3='Phone: (123) 456-7890\n\nHours:\nMon-Fri: 9am-5pm\nWeekends: 11am-8pm\n';
 };
 
-exports.save = function(req, dbPage, callback) {
+exports.save = function(req, res, dbPage, callback) {
     dbPage.largeTitle=req.body.largeTitle;
     dbPage.slogan=req.body.slogan;
 
