@@ -8,6 +8,7 @@
   	},
 	"private": true,
 	"dependencies": {
+		"nodemailer": "x.x",
 		"express": "x.x",
 		"mongodb": "x.x",
 		"mongoose": "x.x",

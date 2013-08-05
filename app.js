@@ -15,7 +15,7 @@ var domainRouter = rek('domainRouter.js');
 var accountRouter = rek('accountRouter.js');
 var mainSite = rek('mainSite.js');
 var userSite = rek('userSite.js');
-
+var email = rek('email.js');
 
 //setup ejs with views folder
 app.set('views', __dirname + '/views');
@@ -35,6 +35,7 @@ app.use(app.router);
 
 //TODO setup sass/compass(suposed to be best) or stylus
 database.init(function (err, initDB) {
+    //email.sendEmail("tbaron@uoguelph.ca","watup","hey dude you got mail");
 	db = initDB;
     dbAccount.dbAccount();
 
