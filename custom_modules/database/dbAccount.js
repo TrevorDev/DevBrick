@@ -40,16 +40,22 @@ exports.dbAccount = function(db) {
         return false;
     };
 
-    accountSchema.methods.removePageByDisplayName = function(name){
+    accountSchema.methods.removePageByDisplayName = function(name, callback){
+        var thisAcc = this;
+        var found = false;
         for(var i = 0;i<this.pages.length;i++){
             if(this.pages[i].displayName===name){
-                this.pages.splice(i,1);
-                page.deletePage(name, this.email, function(){
-                    return true;
+                page.deletePage(name, thisAcc.email, function(){
+                    thisAcc.pages.splice(i,1);
+                    callback(true);
                 });
+                found=true;
+                break;
             }
         }
-        return false;
+        if(!found){
+            callback(false);
+        }
     };
 
     accountSchema.methods.getAllPageDisplayNames = function(pre,post){

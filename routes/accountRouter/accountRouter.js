@@ -56,10 +56,12 @@ exports.addRemovePages = function(req, res, next){
                                 newPage.displayName = req.body.pageDisplayName;
                                 acc.pages.push(newPage);
                                 acc.markModified('pages');
-                                acc.save(function(err){
-                                    page.generateAllPages(acc, function(){
-                                        //redirect to dashboard
-                                        res.redirect('/dashboard/addRemovePages');
+                                page.createPageFolders(auth.getEmail(req), newPage, function(){
+                                    acc.save(function(err){
+                                        page.generateAllPages(acc, function(){
+                                            //redirect to dashboard
+                                            res.redirect('/dashboard/addRemovePages');
+                                        });
                                     });
                                 });
                             });
@@ -68,10 +70,11 @@ exports.addRemovePages = function(req, res, next){
                     break;
                 case 'removePage':
                     errHandler.ensureOrRedirectWithErr(req, res, next, req.body.pageDisplayName!==acc.homePage, '/dashboard/addRemovePages', 'Cannot remove your current homepage. Please select a new homepage below and try deleting again.', function(){
-                        acc.removePageByDisplayName(req.body.pageDisplayName);
-                        acc.save(function(err){
-                            page.generateAllPages(acc, function(){
-                                res.redirect('/dashboard/addRemovePages');
+                        acc.removePageByDisplayName(req.body.pageDisplayName, function(){
+                            acc.save(function(err){
+                                page.generateAllPages(acc, function(){
+                                    res.redirect('/dashboard/addRemovePages');
+                                });
                             });
                         });
                     });
@@ -154,6 +157,7 @@ var createAcc = function(email, password, callback) {
             password: hashedPass,
             domain:'/user/'+email,
             homePage: home.displayName,
+            //Default pages are made here remember to generate page folders below. TODO fix so u dont need to read this stupid comment.
             pages: new Array(home),
             global: new page.clientGlobal()
         });
@@ -169,8 +173,10 @@ var createAcc = function(email, password, callback) {
                         fs.mkdir(process.cwd() + '/public/clientSites/' + email, function() {
                             fs.mkdir(process.cwd() + '/views/clientSites/' + email, function() {
                                 fs.mkdir(process.cwd() + '/views/clientSites/' + email+'/includes', function() {
-                                    page.generateAllPages(newAcc, function() {
-                                        callback(null);
+                                    page.createPageFolders(email, home, function(){
+                                        page.generateAllPages(newAcc, function() {
+                                            callback(null);
+                                        });
                                     });
                                 });
                             });

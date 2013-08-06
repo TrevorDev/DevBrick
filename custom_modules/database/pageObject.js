@@ -6,6 +6,7 @@ var footerInclude = rek('footerInclude.js');
 var headerInclude = rek('headerInclude.js');
 var menuInclude = rek('menuInclude.js');
 var auth = rek('auth.js');
+var fileSystem = rek('fileSystem.js');
 
 //Is there a better way to handle this?
 var PAGE_TYPES = [];
@@ -46,8 +47,10 @@ exports.getPageController = function(pageType){
 }
 
 exports.deletePage = function(pageName, accEmail, callback) {
-    fs.unlink(process.cwd() + '/views/clientSites/' + accEmail + '/' + pageName + '.ejs', function (err) {
-        callback(err);
+    exports.removePageFolders(accEmail, pageName, function(){
+        fs.unlink(process.cwd() + '/views/clientSites/' + accEmail + '/' + pageName + '.ejs', function (err) {
+            callback(err);
+        });
     });
 }
 
@@ -105,10 +108,22 @@ exports.generateAllPages = function(acc, callback) {
 	});
 };
 
+exports.createPageFolders = function(email, dbPage, callback){
+    fs.mkdir(process.cwd() + '/public/clientSites/'+email+"/"+dbPage.displayName, function() {
+        callback();
+    });
+}
+
+exports.removePageFolders = function(email, displayName, callback){
+    fileSystem.removeRecursive(process.cwd() + '/public/clientSites/'+email+"/"+displayName,function(){
+        callback();
+    });
+}
+
 exports.saveImg = function(req, img, dbPage, name, callback){
     if(img&&img.name!==''){
         fs.readFile(img.path, function (err, data) {
-            var appPath = "/public/clientSites/"+auth.getEmail(req)+"/"+dbPage.displayName+"_"+name+"_"+img.name
+            var appPath = "/public/clientSites/"+auth.getEmail(req)+"/"+dbPage.displayName+"/"+dbPage.displayName+"_"+name+"_"+img.name
             var sysPath = process.cwd() + appPath;
             fs.writeFile(sysPath, data, function (err) {
                 callback(appPath, err);
