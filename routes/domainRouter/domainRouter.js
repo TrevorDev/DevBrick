@@ -1,4 +1,10 @@
 exports.domainRouter = function(req, res, next){
-	console.log(req.host);
+	var host =req.host;
+	host = req.host.replace("www.","");
+	if(host=='conjuringhoudini.com'){
+		if(req.url.split('/')[1]!='public'){
+			req.url="/user/conjuringhoudini@gmail.com"+req.url;
+		}
+	}
     next();
 }
