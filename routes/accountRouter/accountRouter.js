@@ -9,8 +9,37 @@ var auth = rek('auth.js');
 var errHandler = rek('errorHandler.js');
 
 var homePage = rek('homePage.js');
+var styleInclude = rek('styleInclude.js');
 //var contactPage = rek('contactPage.js');
 var routingHelper = rek('routingHelper.js');
+
+
+exports.changeStyle = function(req, res, next){
+    errHandler.ensureOrRedirectWithErr(req, res, next, auth.isLoggedIn(req), '/', 'You must login to modify your pages.', function(){
+        var accSchema = mongoose.model('Account');
+        accSchema.get(auth.getEmail(req), function(err, acc){
+            res.template.account = acc;
+
+
+            switch(req.params[0])
+            {
+                case 'saveStyle':
+                    var pageData = acc.getIncludePageByDisplayName('includes/style');
+                    pageData.backgroundColor = req.body.background;
+                    acc.markModified('includePages');
+                    acc.save(function(err){
+                        page.generateAllPages(acc, function(){
+                            //redirect to dashboard
+                            res.redirect('/dashboard/changeStyle');
+                        });
+                    });
+                    break;
+                default:
+                    res.redirect('/');
+            }
+        });
+    });
+}
 
 exports.saveSiteName = function(req, res, next){
     errHandler.ensureOrRedirectWithErr(req, res, next, auth.isLoggedIn(req), '/', 'You must login to modify your pages.', function(){
@@ -150,6 +179,7 @@ var createAcc = function(email, password, callback) {
     cryptoUtil.crypt(password, function(hashedPass){
         // Store hash in your password DB.
         var home = new homePage.page();
+        var style = new styleInclude.page();
         //var contact = new contactPage.page();
         var accSchema = mongoose.model('Account');
         var newAcc = new accSchema({
@@ -159,6 +189,7 @@ var createAcc = function(email, password, callback) {
             homePage: home.displayName,
             //Default pages are made here remember to generate page folders below. TODO fix so u dont need to read this stupid comment.
             pages: new Array(home),
+            includePages: new Array(style),
             global: new page.clientGlobal()
         });
 

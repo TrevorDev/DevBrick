@@ -8,6 +8,40 @@
           <div class="hero-unit">
             <h1>Style</h1>
               <br>
+              <div class="container-fluid">
+                  <div class="row-fluid">
+                      <div class="span6">
+                          
+                          <form method="post" action="/dashboard/changeStyle/saveStyle">
+                              <h5>Background Color</h5>
+                              <select name="background">
+                                <option style="" value="#FFFFFF">White(Default)</options>
+                                <option style="color:#2c3e50" value="#2c3e50">CONCRETE</options>
+                                <option style="color:#2980b9" value="#2980b9">MIDNIGHT BLUE</options>
+                                  <option style="color:#000000" value="#000000">Black</options>
+                              </select>
+                              <br>
+                              <h5>Secondary Color</h5>
+                              <select name="secondary">
+                                <option style="color:#eeeeee" value="#eeeeee">Grey(Default)</options>
+                                <option style="color:#2c3e50" value="#2c3e50">CONCRETE</options>
+                                <option style="color:#2980b9" value="#2980b9">MIDNIGHT BLUE</options>
+                              </select>
+                              <br>
+                              <button class="btn" type="submit">Save Style <i class="icon-flag"></i></button>
+                          </form>
+                      </div>
+                      <div class="span6">
+                          <!--<h5>Mini Logo</h5>-->
+                      </div>
+                  </div>
+                  <br>
+                  <div class="row-fluid">
+                      <div class="span6">
+                          <!--<h3>Your Domain Name</h3>-->
+                      </div>
+                  </div>
+              </div>
           </div>
       </div><!--/row-->
     </div><!--/span-->

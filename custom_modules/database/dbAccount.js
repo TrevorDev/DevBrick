@@ -21,6 +21,7 @@ exports.dbAccount = function(db) {
 		},
         homePage: String,
 		pages: Array,
+        includePages: Array,
         global: mongoose.Schema.Types.Mixed
 	});
 
@@ -35,6 +36,14 @@ exports.dbAccount = function(db) {
         for(var i = 0;i<this.pages.length;i++){
             if(this.pages[i].displayName===name){
                 return this.pages[i];
+            }
+        }
+        return false;
+    };
+    accountSchema.methods.getIncludePageByDisplayName = function(name){
+        for(var i = 0;i<this.includePages.length;i++){
+            if(this.includePages[i].displayName===name){
+                return this.includePages[i];
             }
         }
         return false;

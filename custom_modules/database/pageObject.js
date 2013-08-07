@@ -5,6 +5,7 @@ var pageObject = rek('pageObject.js');
 var footerInclude = rek('footerInclude.js');
 var headerInclude = rek('headerInclude.js');
 var menuInclude = rek('menuInclude.js');
+var styleInclude = rek('styleInclude.js');
 var auth = rek('auth.js');
 var fileSystem = rek('fileSystem.js');
 
@@ -66,6 +67,9 @@ exports.generatePage = function(pageToGen, accEmail, callback) {
         var options = {};
 		options.filename = process.cwd() + '/views/clientSites/' + accEmail + '/' + pageToGen.displayName + '.ejs';
         options.pageData = pageToGen;
+        if(pageToGen.publicFileName){
+            options.filename = process.cwd() + '/public/clientSites/' + accEmail + '/' + pageToGen.publicFileName;
+        }
         if(pageToGen.open && pageToGen.close){
             options.open = pageToGen.open;
             options.close = pageToGen.close;
@@ -96,13 +100,17 @@ exports.generateAllPages = function(acc, callback) {
 	var bottom = new footerInclude.page(acc);
 	var header = new headerInclude.page(acc);
 
-	pageObject.generatePage(menu, acc.email, function() {
+    pageObject.generatePage(menu, acc.email, function() {
 		pageObject.generatePage(bottom, acc.email, function() {
 			pageObject.generatePage(header, acc.email, function() {
 				for (var i = 0; i < acc.pages.length; i++) {
 					numRunning++;
 					pageObject.generatePage(acc.pages[i], acc.email, genCallBack);
 				}
+                for (var i = 0; i < acc.includePages.length; i++) {
+                    numRunning++;
+                    pageObject.generatePage(acc.includePages[i], acc.email, genCallBack);
+                }
 			});
 		});
 	});
