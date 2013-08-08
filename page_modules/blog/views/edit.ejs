@@ -1,13 +1,6 @@
 <% include includes/header %>
 <form class="form-signin" action="/savePage/<%= pageData.displayName %>" method="post">
-<div style="padding:20px;width:100%;">
-        <button class="btn btn-primary btn-large" style="background-color:#333333;background-color:#222222;" type="submit">
-            Save Page
-        </button>
-        <a href="/dashboard"><button class="btn btn-primary btn-large" style="background-color:#333333;background-color:#222222;" type=button>
-            Back To Dashboard
-        </button></a>
-</div>
+<%- libs.savePageBackToDash() %>
 
 <div class="container-fluid hero-unit">
             <h1><%- libs.editHtmlHelper.editTextInput(pageData, "blogName", "Blog Name") %></h1>

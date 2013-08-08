@@ -5,3 +5,15 @@ exports.editTextArea = function(pageData, field){
 exports.editTextInput = function(pageData, field, placeHolder){
 	return '<input type="text" class="input-block-level" placeholder="'+placeHolder+'" name="'+field+'" value="'+pageData[field]+'">';
 }
+
+exports.savePageBackToDash = function (){
+	//ESCAPING NEWLINE good idea?
+	return '<div style="padding:20px;">\
+		        <button class="btn btn-primary btn-large" style="background-color:#333333;background-color:#222222;" type="submit">\
+		            Save Page\
+		        </button>\
+		        <a href="/dashboard"><button class="btn btn-primary btn-large" style="background-color:#333333;background-color:#222222;" type=button>\
+		            Back To Dashboard\
+		        </button></a>\
+		    </div>';
+}

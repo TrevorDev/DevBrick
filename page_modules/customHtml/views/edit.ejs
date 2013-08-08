@@ -1,13 +1,6 @@
 <% include includes/header %>
 <form class="form-signin" method="post" action="/savePage/<%= pageData.displayName %>" enctype="multipart/form-data">
-    <div style="padding:20px;">
-        <button class="btn btn-primary btn-large" style="background-color:#333333;background-color:#222222;" type="submit">
-            Save Page
-        </button>
-        <a href="/dashboard"><button class="btn btn-primary btn-large" style="background-color:#333333;background-color:#222222;" type=button>
-            Back To Dashboard
-        </button></a>
-    </div>
+    <%- libs.savePageBackToDash() %>
     <p>&lt;body&gt;</p>
     <textarea rows="50" style="-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;width: 90%;resize:vertical;" name="html"><%- pageData.html %></textarea>
     <p>&lt;&#47;body&gt;</p>
