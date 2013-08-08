@@ -1,6 +1,6 @@
 <% include includes/header %>
 <form class="form-signin" action="/savePage/<%= pageData.displayName %>" method="post">
-<%- libs.savePageBackToDash() %>
+<%- libs.editHtmlHelper.savePageBackToDash() %>
 
 <div class="container-fluid hero-unit">
             <h1><%- libs.editHtmlHelper.editTextInput(pageData, "blogName", "Blog Name") %></h1>

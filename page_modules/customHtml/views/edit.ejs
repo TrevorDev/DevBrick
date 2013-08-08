@@ -1,6 +1,6 @@
 <% include includes/header %>
 <form class="form-signin" method="post" action="/savePage/<%= pageData.displayName %>" enctype="multipart/form-data">
-    <%- libs.savePageBackToDash() %>
+    <%- libs.editHtmlHelper.savePageBackToDash() %>
     <p>&lt;body&gt;</p>
     <textarea rows="50" style="-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;width: 90%;resize:vertical;" name="html"><%- pageData.html %></textarea>
     <p>&lt;&#47;body&gt;</p>
