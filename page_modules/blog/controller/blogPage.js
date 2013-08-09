@@ -9,7 +9,7 @@ exports.page = function() {
     this.blogPosts = [];
     this.blogPosts.push(new exports.blogPost("Sample Post Title", "Sample blog text"));
     this.blogPosts.push(new exports.blogPost("Sample Post Title2", "Sample blog text2"));
-    this.blogName="blog name";
+    //this.blogName="blog name";
 };
 
 exports.save = function(req, res, dbPage, callback) {
@@ -18,7 +18,7 @@ exports.save = function(req, res, dbPage, callback) {
     }else if(req.body.submit){
         dbPage.blogPosts.push(new exports.blogPost(req.body.postTitle, req.body.postText));
     }else{
-        dbPage.blogName=req.body.blogName;
+        //dbPage.blogName=req.body.blogName;
     }
     callback("/editPage/"+dbPage.pageType+"/"+dbPage.displayName);
 }
