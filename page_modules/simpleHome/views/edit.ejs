@@ -1,0 +1,16 @@
+<% include includes/header %>
+<form class="form-signin" method="post" action="/savePage/<%= pageData.displayName %>" enctype="multipart/form-data">
+    <%- libs.editHtmlHelper.savePageBackToDash() %>
+    <div class="container-fluid">
+        <!-- Main hero unit for a primary marketing message or call to action
+        -->
+        <div class="row-fluid">
+            <div class="span12">
+                    <h1>
+                        <%- libs.editHtmlHelper.editTextInput(pageData, "largeTitle", "Title") %>
+                    </h1>
+            </div>
+        </div>
+    </div>
+</form>
+<% include includes/footer %>

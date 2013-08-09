@@ -6,6 +6,7 @@ exports.page = function(acc) {
     this.publicFileName = "style.css";
     this.backgroundColor = "#FFFFFF";
     this.secondaryColor = "#eeeeee";
+    this.font = "";
     this.open = '<@';
     this.close = '@>';
 };
