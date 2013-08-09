@@ -27,9 +27,7 @@ exports.changeStyle = function(req, res, next){
                     var pageData = acc.getIncludePageByDisplayName('includes/style');
                     pageData.backgroundColor = req.body.background;
                     pageData.secondaryColor = req.body.secondaryColor;
-                    if(req.body.font){
-                        pageData.font = req.body.font;
-                    }
+                    pageData.font = req.body.font;
                     acc.markModified('includePages');
                     acc.save(function(err){
                         page.generateAllPages(acc, function(){

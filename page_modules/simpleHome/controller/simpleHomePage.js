@@ -6,7 +6,7 @@ var fs = require('fs');
 
 exports.page = function() {
     pageObject.page.call(this, 'simpleHome', 'simpleHome');
-    this.largeTitle = 'large title';
+    this.largeTitle = 'Simple Home Page';
 };
 
 exports.save = function(req, res, dbPage, callback) {
