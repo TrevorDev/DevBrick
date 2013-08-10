@@ -32,6 +32,7 @@ app.use(express.cookieSession());
 app.use(express.bodyParser());
 app.use(domainRouter.domainRouter);
 app.use(app.router);
+app.use(mainSite.pageNotFound);
 
 //TODO setup sass/compass(suposed to be best) or stylus
 database.init(function (err, initDB) {

@@ -53,6 +53,11 @@ exports.default = function(req, res, next) {
     exports.showMainPage(req, res, next);
 }
 
+exports.pageNotFound = function(req, res, next) {
+    req.params[0]='404';
+    exports.showMainPage(req, res, next);
+}
+
 exports.showMainPage = function(req, res, next) {
 	view = stringUtil.removeTrailingSlash(req.params[0]);
 
