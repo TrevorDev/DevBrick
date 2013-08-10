@@ -3,7 +3,11 @@
     <div class="row-fluid">
         <div class="span12">
             <% for(var i=pageData.blogPosts.length-1; i>=0; i--) {%>
-                <div class="well"><h4 class="media-heading"><%= pageData.blogPosts[i].heading %></h4><%= pageData.blogPosts[i].text %></div>
+                <div class="well">
+                	<h4 class="media-heading"><%= pageData.blogPosts[i].heading %></h4>
+                	<p><%= pageData.blogPosts[i].text %></p>
+                	<div><%- pageData.blogPosts[i].video %></div>
+                </div>
             <% } %>
         </div>
     </div>             

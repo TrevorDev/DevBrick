@@ -6,14 +6,17 @@
         <div class="span12">
                 <div class="well" style="overflow: hidden;">
                     <input type="text" placeholder="Post Title" name="postTitle">
+                    <input type="text" placeholder="Add youtube video by link" name="postVideo">
                     <textarea style="width:100%;" placeholder="Post Text" rows="4" name="postText"></textarea>
                     <button class="pull-right btn" type="submit" name="submit" value="true">
                         Submit Post
                     </button>
                 </div>
                 <% for(var i=pageData.blogPosts.length-1; i>=0; i--) {%>
-                    <div class="well">
-                        <h4 class="media-heading"><%= pageData.blogPosts[i].heading %></h4><%= pageData.blogPosts[i].text %>
+                    <div class="well" style="overflow: hidden;">
+                        <h4 class="media-heading"><%= pageData.blogPosts[i].heading %></h4>
+                        <p><%= pageData.blogPosts[i].text %></p>
+                        <div><%- pageData.blogPosts[i].video %></div>
                         <button class="pull-right btn" type="submit" name="deletePost" value="<%=i%>">
                             Delete Post
                         </button>
