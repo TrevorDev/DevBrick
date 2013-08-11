@@ -146,7 +146,7 @@ exports.savePage = function(req, res, next){
                                 res.redirect(redirect);
                             });
                         });
-                    });
+                    }, acc);
                     break;
                 }
             }
