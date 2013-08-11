@@ -22,11 +22,14 @@
                 	<h4 class="media-heading"><%= pageData.blogPosts[i].heading %></h4>
                 	<p><%= pageData.blogPosts[i].text %></p>
 
-                    <% if(pageData.blogPosts[i].video){ %>
-                            <div style="width: 100%;text-align: center;">
-                            <iframe style="width:100%;max-width:560px;height:315px;display: inline-block;" src="//www.youtube.com/embed/<%- pageData.blogPosts[i].video %>?rel=0" frameborder="0" allowfullscreen></iframe>';
-                            </div>
-                    <% } %>
+                    <div style="width: 100%;text-align: center;">
+                            <% if(pageData.blogPosts[i].video){ %>
+                                <iframe style="width:100%;max-width:560px;height:315px;display: inline-block;vertical-align:top;" src="//www.youtube.com/embed/<%- pageData.blogPosts[i].video %>?rel=0" frameborder="0" allowfullscreen></iframe>
+                            <% } %>
+                            <% if(pageData.blogPosts[i].img){ %>
+                                <img style="width: 100%;max-width:1000px;max-height:315px;display: inline-block;<% if(pageData.blogPosts[i].imgBorder){ %> border: solid 2px; <% } %>" src="<%- pageData.blogPosts[i].img %>">
+                            <% } %>
+                    </div>
 
                     <% if(pageData.allowComments){ %>
                             <div class="fb-comments" data-href="<%- pageData.pageLink %><%- pageData.blogPosts[i].commentUrl %>" num_posts="3" data-width="460px"></div>

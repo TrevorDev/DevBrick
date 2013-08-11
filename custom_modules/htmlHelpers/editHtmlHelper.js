@@ -6,6 +6,11 @@ exports.editTextInput = function(pageData, field, placeHolder){
 	return '<input type="text" class="input-block-level" placeholder="'+placeHolder+'" name="'+field+'" value="'+pageData[field]+'">';
 }
 
+exports.editImgInput = function(pageData, field){
+	return '<input type="file" name="'+field+'" id="file" value="choose">\
+            <span style="white-space: nowrap;"><input type="checkbox" name="'+field+'Border" value="true"> Add picture border</span>';
+}
+
 exports.savePageBackToDash = function (){
 	//ESCAPING NEWLINE good idea?
 	return '<div style="padding:20px;">\

@@ -2,22 +2,30 @@
 
 
 <style>
-.fb-comments, .fb-comments span, .fb-comments.fb_iframe_widget span iframe {
+.fbFeedbackContent, .fb-comments, .fb-comments span, .fb-comments.fb_iframe_widget span iframe {
     width: 100% !important;
+}
+#u_0_0{
+    min-height:0px !important;
 }
 </style>
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
+<script>
+(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
   js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
   fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+}(document, 'script', 'facebook-jssdk'));
+//$('#u_0_0').ready(function(){
+
+//});
+</script>
 
 
 
-<form class="form-signin" action="/savePage/<%= pageData.displayName %>" method="post">
+<form class="form-signin" action="/savePage/<%= pageData.displayName %>" enctype="multipart/form-data" method="post">
 <%- libs.editHtmlHelper.savePageBackToDash() %>
 <div class="container-fluid">
     <div class="row-fluid">
@@ -28,6 +36,7 @@
                 <div class="well" style="overflow: hidden;">
                     <input type="text" placeholder="Post Title" name="postTitle">
                     <input type="text" placeholder="Add youtube video by link" name="postVideo">
+                    <br>Add image to blog post <%- libs.editHtmlHelper.editImgInput(pageData, 'postPic') %>
                     <textarea style="width:100%;" placeholder="Post Text" rows="4" name="postText"></textarea>
                     <button class="pull-right btn" type="submit" name="submit" value="true">
                         Submit Post
@@ -40,11 +49,15 @@
                         </button>
                         <h4 class="media-heading"><%= pageData.blogPosts[i].heading %></h4>
                         <p><%= pageData.blogPosts[i].text %></p>
-                        <% if(pageData.blogPosts[i].video){ %>
-                            <div style="width: 100%;text-align: center;">
-                            <iframe style="width:100%;max-width:560px;height:315px;display: inline-block;" src="//www.youtube.com/embed/<%- pageData.blogPosts[i].video %>?rel=0" frameborder="0" allowfullscreen></iframe>';
-                            </div>
-                        <% } %>
+                        
+                        <div style="width: 100%;text-align: center;">
+                            <% if(pageData.blogPosts[i].video){ %>
+                                <iframe style="width:100%;max-width:560px;height:315px;display: inline-block;vertical-align:top;" src="//www.youtube.com/embed/<%- pageData.blogPosts[i].video %>?rel=0" frameborder="0" allowfullscreen></iframe>
+                            <% } %>
+                            <% if(pageData.blogPosts[i].img){ %>
+                                <img style="width: 100%;max-width:1000px;max-height:315px;display: inline-block;<% if(pageData.blogPosts[i].imgBorder){ %> border: solid 2px; <% } %>" src="<%- pageData.blogPosts[i].img %>">
+                            <% } %>
+                        </div>
 
                         <% if(pageData.allowComments){ %>
                             <div class="fb-comments" data-href="<%- pageData.pageLink %><%- pageData.blogPosts[i].commentUrl %>" num_posts="3" data-width="460px"></div>
