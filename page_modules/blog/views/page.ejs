@@ -27,7 +27,7 @@
                                 <iframe style="width:100%;max-width:560px;height:315px;display: inline-block;vertical-align:top;" src="//www.youtube.com/embed/<%- pageData.blogPosts[i].video %>?rel=0" frameborder="0" allowfullscreen></iframe>
                             <% } %>
                             <% if(pageData.blogPosts[i].img){ %>
-                                <img style="width: 100%;max-width:1000px;max-height:315px;display: inline-block;<% if(pageData.blogPosts[i].imgBorder){ %> border: solid 2px; <% } %>" src="<%- pageData.blogPosts[i].img %>">
+                                <img style="max-width:100%;max-height:315px;display: inline-block;<% if(pageData.blogPosts[i].imgBorder){ %> border: solid 2px; <% } %>" src="<%- pageData.blogPosts[i].img %>">
                             <% } %>
                     </div>
 

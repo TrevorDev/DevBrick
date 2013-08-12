@@ -3,10 +3,18 @@
     <!-- Main hero unit for a primary marketing message or call to action
     -->
     <div class="row-fluid">
-        <div style="margin-top:15%;" class="span8 offset2">
+        <div style="margin-top:10%;" class="span10 offset1">
                 <h1 style="font-size:5em;text-align:center;line-height:60px;">
                     <%= pageData.largeTitle %>
                 </h1>
+                <h1 style="font-size:4em;text-align:center;line-height:55px;">
+                    <%= pageData.miniTitle %>
+                </h1>
+                <div style="width: 100%;text-align: center;">
+                    <% if(pageData.logo){ %>
+                        <img style="max-width:100%;max-height:315px;display: inline-block;<% if(pageData.logoBorder){ %> border: solid 2px; <% } %>" src="<%- pageData.logo %>">
+                    <% } %>
+                </div>
         </div>
     </div>
 </div>
