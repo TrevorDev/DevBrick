@@ -141,3 +141,17 @@ exports.saveImg = function(req, img, dbPage, name, callback){
         callback('');
     }
 };
+
+exports.saveFile = function(req, file, dbPage, name, callback){
+    if(file&&file.name!==''){
+        fs.readFile(file.path, function (err, data) {
+            var appPath = "/public/clientSites/"+auth.getEmail(req)+"/"+dbPage.displayName+"/"+dbPage.displayName+"_"+name+"_"+file.name
+            var sysPath = process.cwd() + appPath;
+            fs.writeFile(sysPath, data, function (err) {
+                callback(appPath, err);
+            });
+        });
+    }else{
+        callback('');
+    }
+};

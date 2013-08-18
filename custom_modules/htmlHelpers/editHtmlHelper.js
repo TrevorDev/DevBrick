@@ -11,6 +11,10 @@ exports.editImgInput = function(pageData, field){
             <span style="white-space: nowrap;"><input type="checkbox" name="'+field+'Border" value="true"> Add picture border</span>';
 }
 
+exports.editFileInput = function(pageData, field){
+	return '<input type="file" name="'+field+'" id="file" value="choose">';
+}
+
 exports.savePageBackToDash = function (){
 	//ESCAPING NEWLINE good idea?
 	return '<div style="padding:20px;">\
