@@ -1,11 +1,11 @@
 <% include includes/header %>
 <form class="form-signin" method="post" action="/savePage/<%= pageData.displayName %>" enctype="multipart/form-data">
     <%- libs.editHtmlHelper.savePageBackToDash() %>
-    <div class="container-fluid">
+    <div class="container">
         <!-- Main hero unit for a primary marketing message or call to action
         -->
-        <div class="row-fluid">
-            <div class="span12">
+        <div class="row">
+            <div class="col-lg-12">
                     <h1>
                         <%- libs.editHtmlHelper.editTextInput(pageData, "largeTitle", "Title") %>
                         <%- libs.editHtmlHelper.editTextInput(pageData, "miniTitle", "Slogan") %>

@@ -1,14 +1,14 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container-fluid">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-            <a class="brand" href="/"><img class="picDisplay" src="/public/mainSite/assets/img/brick2.svg" width="20px" type="image/svg+xml"/>&nbsp;&nbsp;Dev Brick</a>
-            <div class="nav-collapse collapse">
-                <ul class="nav">
+    <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><img class="picDisplay" src="/public/mainSite/assets/img/brick2.svg" width="20px" type="image/svg+xml"/>&nbsp;&nbsp;Dev Brick</a>
+    </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
                     <li <% if (displayData.view=='home') { %> class="active" <% } %> >
                         <a href="/">Home <i class="icon-home"></i></a>
                     </li>
@@ -24,30 +24,23 @@
                     </li>
                     <% } %>
                 </ul>
-                <% if (!sessionData.loggedIn) { %>
-                 <form class="form-search navbar-form pull-right" method="post" action="/login">
-                  
-                    <div class="input-prepend">
-                      <span class="add-on"><i class="icon-envelope"></i></span>
-                      <input class="span2" placeholder="Email" id="inputIcon" name='email' type="text">
-                    </div>
-                    <div class="input-prepend">
-                      <span class="add-on"><i class="icon-key"></i></span>
-                      <input class="span2" placeholder="Password" id="inputIcon" name='password' type="password">
-                    </div>
-                  <!--<input width="150px" type="text" placeholder="Email" class="input-medium search-query">
-                  <input width="150px" type="text" placeholder="Password" class="input-medium search-query">-->
+                 <% if (!sessionData.loggedIn) { %>
+                 <form class="navbar-form navbar-right" method="post" action="/login">
+                      <div class="form-group">
+                        <input class="form-control" placeholder="Email" id="inputIcon" name='email' type="text">
+                      </div>
+                      
+                      <div class="form-group">
+                        <input class="form-control" placeholder="Password" id="inputIcon" name='password' type="password">
+                      </div>
                   <button type="submit" class="btn">Log In</button>
                 </form>
                  <% } else { %>
-                 <form class="form-search navbar-form pull-right" method="post" action="/logout">
+                 <form class="navbar-form navbar-right" method="post" action="/logout">
                   <p class='muted' style='display: inline;'>Logged in as <%= sessionData.email %></p>
                   <button type="submit" class="btn">Logout</button>
                 </form>
 
                  <% } %>
             </div>
-            <!--/.nav-collapse -->
-        </div>
-    </div>
 </div>            <!-- Begin page content -->

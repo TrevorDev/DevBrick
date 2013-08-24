@@ -1,11 +1,11 @@
 <% include includes/header %>
-<div class="container-fluid">
+<div class="container">
     <!-- Main hero unit for a primary marketing message or call to action
     -->
-    <div class="row-fluid">
-        <div class="span8">
+    <div class="row">
+        <div class="col-lg-8">
 
-            <div class="hero-unit">
+            <div class="jumbotron">
                 <h1>
                     <%= pageData.largeTitle %>
                 </h1>
@@ -18,15 +18,15 @@
             </div>
 
         </div>
-        <div class="span4">
+        <div class="col-lg-4">
             <img style="<!--border-style:solid;border-width:5px;-->margin-top:30px;" src="<%= pageData.bigLogo %>" width="220px">
         </div>
 
 
     </div>
     <!-- Example row of columns -->
-    <div class="row-fluid">
-        <div class="span4">
+    <div class="row">
+        <div class="col-lg-4">
             <h2 align="center">
                 <%= pageData.blockHeading1 %>
             </h2>
@@ -34,7 +34,7 @@
                 <%- pageData.block1 %>
             </p>
         </div>
-        <div class="span4">
+        <div class="col-lg-4">
             <h2 align="center">
                 <%= pageData.blockHeading2 %>
             </h2>
@@ -42,7 +42,7 @@
                 <%- pageData.block2 %>
             </p>
         </div>
-        <div class="span4">
+        <div class="col-lg-4">
             <h2 align="center">
                 <%= pageData.blockHeading3 %>
             </h2>

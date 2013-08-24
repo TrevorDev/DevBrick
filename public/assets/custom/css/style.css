@@ -6,11 +6,6 @@
     margin-right: 0px;
 }
 
-.container-fluid {
-    padding-left:20px;
-    padding-right:20px;
-}
-
 body {
     min-width: 320px;
     padding-right: 0px;
@@ -21,9 +16,9 @@ body {
 
 /* Sticky footer styles
             ------------------------------------------------------------------------------------------------- */
-html,
-body {
+html, body {
     height: 100%;
+    background-color:#8cc9d1;
     /* The html and body elements cannot have any padding or margin. */
 }
 /* Wrapper for page content to push down footer */
@@ -39,8 +34,9 @@ body {
 #footer {
     height: 60px;
 }
+
 #footer {
-    background-color: #f5f5f5;
+     background-color: #060e0f;
 }
 /* Lastly, apply responsive CSS fixes as necessary */
 @media (max-width: 767px) {
@@ -52,10 +48,25 @@ body {
 /* Custom page CSS
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
-.container {
-    width: auto;
-    max-width: 680px;
+
+.container-wide {
+    padding-left:20px;
+    padding-right:20px;
 }
-.container-fluid .credit {
-    margin: 20px 0;
+
+.container-wide .credit {
+    padding: 20px 0;
 }
+
+.muted {
+    color: #999999;
+}
+
+.masthead {
+    background-color:#33A6C9; width:100%;padding-top:20px;
+}
+
+.masthead h1 {
+    font-size: 70px; line-height: 1; letter-spacing: -2px;
+}
+

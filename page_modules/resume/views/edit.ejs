@@ -2,9 +2,9 @@
 
 <form class="form-signin" action="/savePage/<%= pageData.displayName %>" enctype="multipart/form-data" method="post">
 <%- libs.editHtmlHelper.savePageBackToDash() %>
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span12">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
                 <div class="well" style="overflow: hidden;">
                     <br>Upload Resume pdf
                     <%- libs.editHtmlHelper.editFileInput(pageData, 'resumePDF') %>
