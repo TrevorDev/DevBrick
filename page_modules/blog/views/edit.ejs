@@ -29,14 +29,20 @@
 <%- libs.editHtmlHelper.savePageBackToDash() %>
 <div class="container">
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-md-12">
                 <label class="checkbox">
                   <input type="checkbox" name="allowComments" value="true" <% if(pageData.allowComments){ %> checked <% } %> > Enable facebook comments
                 </label>
                 <div class="well" style="overflow: hidden;">
-                    <input type="text" placeholder="Post Title" name="postTitle">
-                    <input type="text" placeholder="Add youtube video by link" name="postVideo">
-                    <br>Add image to blog post <%- libs.editHtmlHelper.editImgInput(pageData, 'postPic') %>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="Post Title" name="postTitle">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="Add youtube video by link" name="postVideo">
+                        </div>
+                    </div>
+                    Add image to blog post <%- libs.editHtmlHelper.editImgInput(pageData, 'postPic') %>
                     <textarea style="width:100%;" placeholder="Post Text" rows="4" name="postText"></textarea>
                     <button class="pull-right btn" type="submit" name="submit" value="true">
                         Submit Post

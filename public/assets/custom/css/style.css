@@ -70,3 +70,28 @@ html, body {
     font-size: 70px; line-height: 1; letter-spacing: -2px;
 }
 
+.bs-sidenav>li>a {
+padding: 1px 5px;
+}
+
+.btn-primary {
+    border: none;
+}
+
+select {
+    border:1px solid #cccccc;
+    background-color: white;
+    height: 30px;
+    line-height: 30px;
+}
+
+textarea {
+    border:1px solid #cccccc;
+}
+
+input {
+}
+
+.btn-black{
+    border:1px solid #cccccc
+}

@@ -3,7 +3,7 @@ exports.editTextArea = function(pageData, field){
 }
 
 exports.editTextInput = function(pageData, field, placeHolder){
-	return '<input type="text" class="input-block-level" placeholder="'+placeHolder+'" name="'+field+'" value="'+pageData[field]+'">';
+	return '<input class="form-control"  type="text" class="input-block-level" placeholder="'+placeHolder+'" name="'+field+'" value="'+pageData[field]+'">';
 }
 
 exports.editImgInput = function(pageData, field){
