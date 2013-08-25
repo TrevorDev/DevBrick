@@ -1,33 +1,32 @@
 <% include ../includes/dashboardHeader %>
-            <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span3">
+            <div class="container-wide">
+      <div class="row">
+        <div class="col-md-3">
           <% include ../includes/dashboardMenu %>
         </div><!--/span-->
-        <div class="span9">
-          <div class="hero-unit">
+        <div class="col-md-9">
+          <div class="well">
             <h1>Style</h1>
               <br>
-              <div class="container-fluid">
-                  <div class="row-fluid">
-                      <div class="span6">
+              <div class="container-wide">
+                  <div class="row">
+                      <div class="col-md-6">
                           
                           <form method="post" action="/dashboard/changeStyle/saveStyle">
-                              <h5>Background Color</h5>
+                              <h3>Background Color</h3>
                               <select name="background">
                                 <option style="" value="#FFFFFF">White(Default)</options>
-                                <option style="color:#2c3e50" value="#2c3e50">Storm Cloud</options>
-                                <option style="color:#2980b9" value="#2980b9">Toy Ball</options>
-                                <option style="color:#3498db" value="#3498db">Deep Sky</options>
-                                <option style="color:#c0392b" value="#c0392b">Arcade</options>
-                                <option style="color:#16a085" value="#16a085">Bouncy Ball</options>
-                                <option style="color:#e67e22" value="#e67e22">Creamsicle</options>
-                                <option style="color:#e74c3c" value="#e74c3c">Rocket</options>
-                                <option style="color:#f1c40f" value="#f1c40f">Sun Burst</options>
-                                <option style="color:#2ecc71" value="#2ecc71">Emerald</options>
+                                <option style="color:#2c3e50" value="#2c3e50">Storm Cloud Grey</options>
+                                <option style="color:#2980b9" value="#2980b9">Toy Ball Blue</options>
+                                <option style="color:#3498db" value="#3498db">Deep Sky Blue</options>
+                                <option style="color:#c0392b" value="#c0392b">Arcade Red</options>
+                                <option style="color:#16a085" value="#16a085">Bouncy Ball Green</options>
+                                <option style="color:#e67e22" value="#e67e22">Creamsicle Orange</options>
+                                <option style="color:#e74c3c" value="#e74c3c">Rocket Red</options>
+                                <option style="color:#f1c40f" value="#f1c40f">Sun Burst Yellow</options>
+                                <option style="color:#2ecc71" value="#2ecc71">Emerald Green</options>
                               </select>
-                              <br>
-                              <h5>Secondary Color</h5>
+                              <!--<h5>Secondary Color</h5>
                               <select name="secondary">
                                 <option style="color:#eeeeee" value="#eeeeee">Grey(Default)</options>
                                 <option style="color:#2c3e50" value="#2c3e50">Storm Cloud</options>
@@ -39,8 +38,7 @@
                                 <option style="color:#e74c3c" value="#e74c3c">Rocket</options>
                                 <option style="color:#f1c40f" value="#f1c40f">Sun Burst</options>
                                 <option style="color:#2ecc71" value="#2ecc71">Emerald</options>
-                              </select>
-                              <br>
+                              </select>-->
 
                               <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
                               <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
@@ -49,7 +47,7 @@
                               <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
                               <link href='http://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
 
-                              <h5>Font</h5>
+                              <h3>Font</h3>
                               <input  name="font" type="radio" value="" checked><span>Default</span><br>
                               <input name="font" type="radio" value="Montserrat"><span style="font-family: 'Montserrat', sans-serif;">Montserrat</span><br>
                               <input name="font" type="radio" value="Open Sans"><span style="font-family: 'Open Sans', sans-serif;">Open Sans</span><br>
@@ -57,17 +55,17 @@
                               <input name="font" type="radio" value="Lato"><span style="font-family: 'Lato', sans-serif;">Lato</span><br>
                               <input name="font" type="radio" value="PT Sans"><span style="font-family: 'PT Sans', sans-serif;">PT Sans</span><br>
                               <input name="font" type="radio" value="Arvo"><span style="font-family: 'Arvo', sans-serif;">Arvo</span><br>
-                              <br>
-                              <button class="btn" type="submit">Save Style <i class="icon-flag"></i></button>
+                              
+                              <button class="btn btn-black" type="submit">Save Style <i class="icon-flag"></i></button>
                           </form>
                       </div>
-                      <div class="span6">
+                      <div class="col-md-6">
                           <!--<h5>Mini Logo</h5>-->
                       </div>
                   </div>
                   <br>
-                  <div class="row-fluid">
-                      <div class="span6">
+                  <div class="row">
+                      <div class="col-md-6">
                           <!--<h3>Your Domain Name</h3>-->
                       </div>
                   </div>

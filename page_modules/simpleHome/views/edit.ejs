@@ -1,14 +1,20 @@
 <% include includes/header %>
 <form class="form-signin" method="post" action="/savePage/<%= pageData.displayName %>" enctype="multipart/form-data">
     <%- libs.editHtmlHelper.savePageBackToDash() %>
-    <div class="container-fluid">
+    <div class="container-wide">
         <!-- Main hero unit for a primary marketing message or call to action
         -->
-        <div class="row-fluid">
-            <div class="span12">
+        <div class="row">
+            <div class="col-md-12">
                     <h1>
+                        <div class="form-horizontal">
+                        <div class="form-group">
                         <%- libs.editHtmlHelper.editTextInput(pageData, "largeTitle", "Title") %>
+                    </div>
+                        <div class="form-group">
                         <%- libs.editHtmlHelper.editTextInput(pageData, "miniTitle", "Slogan") %>
+                        </div>
+                        </div>
                     </h1>
                     <p>Logo (optional)</p> <%- libs.editHtmlHelper.editImgInput(pageData, 'logo') %>
             </div>

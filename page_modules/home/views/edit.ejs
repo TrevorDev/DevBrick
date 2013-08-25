@@ -1,26 +1,26 @@
 <% include includes/header %>
 <form class="form-signin" method="post" action="/savePage/<%= pageData.displayName %>" enctype="multipart/form-data">
     <%- libs.editHtmlHelper.savePageBackToDash() %>
-<div class="container-fluid">
+<div class="container-wide">
     <!-- Main hero unit for a primary marketing message or call to action
     -->
-    <div class="row-fluid">
-        <div class="span8">
+    <div class="row">
+        <div class="col-md-8">
 
-            <div class="hero-unit">
+            <div class="jumbotron">
                 <h1>
                     <%- libs.editHtmlHelper.editTextInput(pageData, "largeTitle", "Title") %>
                 </h1>
                 <p>
                     <%- libs.editHtmlHelper.editTextInput(pageData, "slogan", "Slogan") %>
                 </p>
-                <p>
+                <!--<p>
                     <a href="about.php" class="btn btn-primary btn-large">Learn more &raquo;</a>
-                </p>
+                </p>-->
             </div>
 
         </div>
-        <div class="span4">
+        <div class="col-md-4">
             <h2>
                 Upload Logo Image
             </h2>
@@ -33,20 +33,20 @@
 
     </div>
     <!-- Example row of columns -->
-    <div class="row-fluid">
-        <div class="span4">
+    <div class="row">
+        <div class="col-md-4">
             <h2>
                 <%- libs.editHtmlHelper.editTextInput(pageData, "blockHeading1", "Block Heading") %>
             </h2>
             <%- libs.editHtmlHelper.editTextArea(pageData, "block1") %>
         </div>
-        <div class="span4">
+        <div class="col-md-4">
             <h2>
                 <%- libs.editHtmlHelper.editTextInput(pageData, "blockHeading2", "Block Heading") %>
             </h2>
                 <%- libs.editHtmlHelper.editTextArea(pageData, "block2") %>
         </div>
-        <div class="span4">
+        <div class="col-md-4">
             <h2>
                 <%- libs.editHtmlHelper.editTextInput(pageData, "blockHeading3", "Block Heading") %>
             </h2>
