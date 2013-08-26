@@ -54,6 +54,9 @@ exports.default = function(req, res, next) {
 }
 
 exports.pageNotFound = function(req, res, next) {
+    if(!req.params){
+        req.params=[];
+    }
     req.params[0]='404';
     exports.showMainPage(req, res, next);
 }
