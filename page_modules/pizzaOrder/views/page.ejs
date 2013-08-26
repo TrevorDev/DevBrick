@@ -1,0 +1,119 @@
+<% include includes/header %>
+<script src="/public/bower_components/angular/angular.min.js"></script>
+<script>
+
+function PizzaCtrl($scope) {
+  $scope.menu = [
+    {name:'Specials', items:[
+        {name:'2 for 1 pickup', price: 11.99},
+        {name:'party pizza and drinks', price: 30.00}]},
+    {name:'Pizza', items:[
+        {name:'Small', price: 2.00},
+        {name:'Large', price: 3.00}]},
+    {name:'Drinks', items:[
+        {name:'Coke', price: 2.00},
+        {name:'Pepsi', price: 3.00}]},
+    {name:'Desert', items:[
+        {name:'Candy', price: 2.00},
+        {name:'Ice Cream', price: 3.00}]}];
+
+  $scope.order = [
+    {name:'Med Pizza', amount:1, price: 10.00},
+    {name:'Drink', amount:2, price: 10.99}];
+ 
+  $scope.addItem = function(t, a) {
+    $scope.order.push({name:t, amount:1,price:a});
+  };
+
+  $scope.subTotal = function() {
+    var count = 0;
+    angular.forEach($scope.order, function(todo) {
+      count += (todo.amount*todo.price);
+    });
+    return $scope.formatPrice(count);
+  };
+
+  $scope.multTotal = function(mult) {
+    var count = 0;
+    angular.forEach($scope.order, function(todo) {
+      count += (todo.amount*todo.price);
+    });
+    return $scope.formatPrice(count*mult);
+  };
+ 
+  $scope.formatPrice = function(price) {
+    return parseFloat(Math.round(price*100)/100).toFixed(2);
+  };
+
+  $scope.archive = function() {
+    var oldTodos = $scope.order;
+    $scope.order = [];
+    angular.forEach(oldTodos, function(todo) {
+      if (!(todo.amount == 0)) $scope.order.push(todo);
+    });
+  };
+}
+
+</script>
+    <div class="container-wide" ng-controller="PizzaCtrl">
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Menu</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Price</th>
+                            <th>Add to order</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="catagory in menu">
+                        <tr>
+                        <td style="font-weight:bold;">{{catagory.name}}</td>
+                        <td></td>
+                        <td></td>
+                        </tr>
+                            <tr ng-repeat="item in catagory.items">
+                                    <td style="width:20%">{{item.name}}</td>
+                                    <td style="width:20%">${{formatPrice(item.price)}}</td>
+                                    <td style="width:15%"><a class="btn btn-primary" type="submit" value="add" ng-click="addItem(item.name, item.price)"><i class="icon-plus"></i></a></td>
+                            </tr>
+                            
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4">
+                <h2>Current Order</h2>
+                <!--[ <a href="" ng-click="archive()">archive</a> ]-->
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Item</th>
+                        <th>Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in order">
+                            <td><input style="width:30px" type="text" ng-model="item.amount"></td>
+                            <td>{{item.name}}</td>
+                            <td>${{formatPrice(item.price*item.amount)}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <div style="float:left;">Subtotal:</div>
+                <div style="float:right;">${{subTotal()}}</div>
+                <div style="clear: both;"></div>
+                <div style="float:left;">Tax: </div>
+                <div style="float:right;">${{multTotal(0.13)}}</div>
+                <div style="clear: both;"></div>
+                <div style="float:left;">Total:</div>
+                <div style="float:right;">${{multTotal(1.13)}}</div>
+                <div style="clear: both;"></div>
+                <br>
+                <button class="btn btn-primary btn-large" style="width:100%" type="submit">Place Order <i class="icon-food"></i></button>
+            </div>
+        </div>
+    </div>
+<% include includes/footer %>
