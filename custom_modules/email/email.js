@@ -11,16 +11,22 @@ var smtpTransport = nodemailer.createTransport("SMTP",{
 exports.sendEmail = function(to,subject,text){
 	var mailOptions = {
 	    from: "DevBrick <devbrickhelper@gmail.com>", // sender address
-	    to: "tbaron@uoguelph.ca", // list of receivers
+	    to: to, // list of receivers
 	    subject: subject, // Subject line
 	    text: text, // plaintext body
 	    html: "<b>"+text+"</b>" // html body
 	}
 	smtpTransport.sendMail(mailOptions, function(err, response){
 		if(err){
-        console.log(err);
+        //console.log(err);
 	    }else{
-	        console.log("Message sent: " + response.message);
+	        //console.log("Message sent: " + response.message);
 	    }
 	});
+}
+
+exports.sendEmailAjax = function(req, res, next){
+	exports.sendEmail(req.body.to, req.body.subject, req.body.text);
+  	res.json({ success: "true"});
+	console.log("sent mail");
 }

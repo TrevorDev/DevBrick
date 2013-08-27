@@ -53,6 +53,9 @@ database.init(function (err, initDB) {
     app.post('/dashboard/changeStyle/*', accountRouter.changeStyle);
     app.post(/\/savePage\/([^\/]+)(\/(.+))?/, accountRouter.savePage);
 
+    //api requests
+    app.post('/sendMail', email.sendEmailAjax);
+
     //static requests
     app.get('/public/*', function(req, res, next){
         express.static(__dirname)(req, res, function(){next('route')});
