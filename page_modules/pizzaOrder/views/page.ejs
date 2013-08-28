@@ -1,14 +1,16 @@
 <% include includes/header %>
 <script src="/public/bower_components/angular/angular.min.js"></script>
-<script type="text/javascript">
-    document.write("\<script src='http://code.jquery.com/jquery-latest.min.js' type='text/javascript'>\<\/script>");
-</script>
 <script>
 
 function PizzaCtrl($scope, $http) {
+    $scope.toppings = [
+    {name:'Pineapple', value: 1},
+    {name:'Peperoni', value: 1},
+    {name:'Mushrooms', value: 1}];
+
   $scope.menu = [
     {name:'Specials', items:[
-        {name:'2 for 1 pickup', price: 11.99},
+        {name:'2 for 1 pickup', price: 11.99, pizza: 2},
         {name:'party pizza and drinks', price: 30.00}]},
     {name:'Pizza', items:[
         {name:'Small', price: 2.00},
@@ -32,6 +34,14 @@ function PizzaCtrl($scope, $http) {
       }
     }
     $scope.order.push({name:t, amount:1,price:a});
+  };
+
+  $scope.subTotal = function() {
+    var count = 0;
+    angular.forEach($scope.order, function(todo) {
+      count += (todo.amount*todo.price);
+    });
+    return $scope.formatPrice(count);
   };
 
   $scope.subTotal = function() {
@@ -107,7 +117,12 @@ function PizzaCtrl($scope, $http) {
                             <tr ng-repeat="item in catagory.items">
                                     <td style="width:20%">{{item.name}}</td>
                                     <td style="width:20%">${{formatPrice(item.price)}}</td>
-                                    <td style="width:15%"><a class="btn btn-primary" type="submit" value="add" ng-click="addItem(item.name, item.price)"><i class="icon-plus"></i></a></td>
+                                    <td style="width:15%" ng-show="item.pizza">
+                                        <a data-toggle="modal" href="#myModal" ng-click="" class="btn btn-primary"><i class="icon-plus"></i></a>
+                                    </td>
+                                    <td style="width:15%" ng-show="!item.pizza">
+                                        <a class="btn btn-primary" type="submit" value="add" ng-click="addItem(item.name, item.price)"><i class="icon-plus"></i></a>
+                                    </td>
                             </tr>
                             
                     </tbody>
@@ -147,5 +162,46 @@ function PizzaCtrl($scope, $http) {
                 <div class="alert alert-info">Orders are to be picked up in store.<br>Estimated wait: 20 min<br>To change order call: 123 456-7890</div>
             </div>
         </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Modal title</h4>
+        </div>
+        <div class="modal-body">
+                  <p># free toppings left</p>
+
+        
+                <div ng-repeat="topping in toppings">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1"> {{topping.name}}
+                    </label>
+                </div>
+
+    <p>Item Price-</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+
+
+
     </div>
+
+
+
+  
+
+
+
 <% include includes/footer %>
