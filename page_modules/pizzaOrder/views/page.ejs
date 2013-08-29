@@ -3,6 +3,30 @@
 <script>
 
 function PizzaCtrl($scope, $http) {
+    //catagorys, bundle, items, type, options, selection, number free, cost each over
+
+    //catagory[]{ bundle[]{item}/item, price }
+
+    //type: pizza, wings, pop
+
+    //pizza: topping, 3, 1 - crust, 1, null
+
+    //options: topping, crust, flavor, type
+
+    $scope.options = [];
+    $scope.options['topping'] = [{name:'bacon'},{name:'cheese'}];
+
+    $scope.template = [
+      {name:'Specials', items:[
+          {name:'Heaven Deal', price: 11.99, items:[
+            {name:'Small Pizza', options:[
+              {name: 'topping',numSelect:3,overPrice:1.00},
+              {name: 'crust',numSelect:0,overPrice:null}
+            ]}
+          ]}
+      ]}
+    ];
+
     $scope.toppings = [
     {name:'Pineapple', value: 1},
     {name:'Peperoni', value: 1},
@@ -10,7 +34,7 @@ function PizzaCtrl($scope, $http) {
 
   $scope.menu = [
     {name:'Specials', items:[
-        {name:'2 for 1 pickup', price: 11.99, pizza: 2},
+        {name:'Heaven Deal', price: 11.99, pizza: 2},
         {name:'party pizza and drinks', price: 30.00}]},
     {name:'Pizza', items:[
         {name:'Small', price: 2.00},
@@ -170,7 +194,7 @@ function PizzaCtrl($scope, $http) {
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Modal title</h4>
+          <h4 class="modal-title">Food Options</h4>
         </div>
         <div class="modal-body">
                   <p># free toppings left</p>
