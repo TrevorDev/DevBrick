@@ -15,13 +15,47 @@ function PizzaCtrl($scope, $http) {
 
     $scope.options = [];
     $scope.options['topping'] = [{name:'bacon'},{name:'cheese'}];
+    $scope.options['crust'] = [{name:'white'},{name:'grain'},,{name:'thick'}];
+    $scope.options['pop'] = [{name:'coke'},{name:'root beer'}];
 
-    $scope.template = [
+    $scope.menu = [
       {name:'Specials', items:[
           {name:'Heaven Deal', price: 11.99, items:[
             {name:'Small Pizza', options:[
               {name: 'topping',numSelect:3,overPrice:1.00},
-              {name: 'crust',numSelect:0,overPrice:null}
+              {name: 'crust',numSelect:1,overPrice:null}
+            ]},
+            {name:'pop', options:[
+              {name: 'pop',numSelect:1,overPrice:null}
+            ]},
+            {name:'pop', options:[
+              {name: 'pop',numSelect:1,overPrice:null}
+            ]}
+          ]},
+          {name:'Other Deal', price: 11.99, items:[
+            {name:'Large Pizza', options:[
+              {name: 'topping',numSelect:3,overPrice:1.00},
+              {name: 'crust',numSelect:1,overPrice:null}
+            ]},
+            {name:'pop', options:[
+              {name: 'pop',numSelect:1,overPrice:null}
+            ]},
+            {name:'pop', options:[
+              {name: 'pop',numSelect:1,overPrice:null}
+            ]}
+          ]}
+      ]},
+      {name:'Pizzas', items:[
+          {name:'Small Pizza', price: 11.99, items:[
+            {name:'Small Pizza', options:[
+              {name: 'topping',numSelect:3,overPrice:1.00},
+              {name: 'crust',numSelect:1,overPrice:null}
+            ]}
+          ]},
+          {name:'Large Pizza', price: 11.99, items:[
+            {name:'Large Pizza', options:[
+              {name: 'topping',numSelect:3,overPrice:1.00},
+              {name: 'crust',numSelect:1,overPrice:null}
             ]}
           ]}
       ]}
@@ -32,7 +66,7 @@ function PizzaCtrl($scope, $http) {
     {name:'Peperoni', value: 1},
     {name:'Mushrooms', value: 1}];
 
-  $scope.menu = [
+  $scope.menutwo = [
     {name:'Specials', items:[
         {name:'Heaven Deal', price: 11.99, pizza: 2},
         {name:'party pizza and drinks', price: 30.00}]},
@@ -59,6 +93,15 @@ function PizzaCtrl($scope, $http) {
     }
     $scope.order.push({name:t, amount:1,price:a});
   };
+
+  $scope.hasOptions = function(item) {
+    for(var i =0;i<item.items.length;i++){
+      if(item.items[i].options&&item.items[i].options.length>0){
+        return true;
+      }
+    }
+    return false;
+  }
 
   $scope.subTotal = function() {
     var count = 0;
@@ -139,12 +182,17 @@ function PizzaCtrl($scope, $http) {
                         <td></td>
                         </tr>
                             <tr ng-repeat="item in catagory.items">
-                                    <td style="width:20%">{{item.name}}</td>
+                                    <td style="width:20%">{{item.name}}
+                                      <ul ng-show="item.items.length > 1">
+                                        <li>pizza</li>
+                                        <li>pop</li>
+                                      </ul>
+                                    </td>
                                     <td style="width:20%">${{formatPrice(item.price)}}</td>
-                                    <td style="width:15%" ng-show="item.pizza">
+                                    <td style="width:15%" ng-show="hasOptions(item)">
                                         <a data-toggle="modal" href="#myModal" ng-click="" class="btn btn-primary"><i class="icon-plus"></i></a>
                                     </td>
-                                    <td style="width:15%" ng-show="!item.pizza">
+                                    <td style="width:15%" ng-show="!hasOptions(item)">
                                         <a class="btn btn-primary" type="submit" value="add" ng-click="addItem(item.name, item.price)"><i class="icon-plus"></i></a>
                                     </td>
                             </tr>
