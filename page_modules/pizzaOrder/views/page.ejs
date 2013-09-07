@@ -15,7 +15,7 @@ function PizzaCtrl($scope, $http) {
 
     $scope.options = [];
     $scope.options['topping'] = [{name:'bacon'},{name:'cheese'}];
-    $scope.options['crust'] = [{name:'white'},{name:'grain'},,{name:'thick'}];
+    $scope.options['crust'] = [{name:'white'},{name:'grain'},{name:'thick'}];
     $scope.options['pop'] = [{name:'coke'},{name:'root beer'}];
 
     $scope.menu = [
@@ -58,6 +58,11 @@ function PizzaCtrl($scope, $http) {
               {name: 'crust',numSelect:1,overPrice:null}
             ]}
           ]}
+      ]},
+      {name:'Desert', items:[
+          {name:'Cinamon sticks', price: 11.99, items:[
+            {name:'Cinamon sticks', options:[]}
+          ]}
       ]}
     ];
 
@@ -66,23 +71,14 @@ function PizzaCtrl($scope, $http) {
     {name:'Peperoni', value: 1},
     {name:'Mushrooms', value: 1}];
 
-  $scope.menutwo = [
-    {name:'Specials', items:[
-        {name:'Heaven Deal', price: 11.99, pizza: 2},
-        {name:'party pizza and drinks', price: 30.00}]},
-    {name:'Pizza', items:[
-        {name:'Small', price: 2.00},
-        {name:'Large', price: 3.00}]},
-    {name:'Drinks', items:[
-        {name:'Coke', price: 2.00},
-        {name:'Pepsi', price: 3.00}]},
-    {name:'Desert', items:[
-        {name:'Candy', price: 2.00},
-        {name:'Ice Cream', price: 3.00}]}];
+  
 
   $scope.order = [
-    {name:'Med Pizza', amount:1, price: 10.00},
-    {name:'Drink', amount:2, price: 10.99}];
+    //{name:'Med Pizza', amount:1, price: 10.00},
+    //{name:'Drink', amount:2, price: 10.99}
+  ];
+
+  $scope.modalItem = {};
  
   $scope.addItem = function(t, a) {
     for(var i = 0;i<$scope.order.length;i++){
@@ -101,6 +97,10 @@ function PizzaCtrl($scope, $http) {
       }
     }
     return false;
+  }
+
+  $scope.setModal = function(item){
+    $scope.modalItem=item;
   }
 
   $scope.subTotal = function() {
@@ -190,7 +190,7 @@ function PizzaCtrl($scope, $http) {
                                     </td>
                                     <td style="width:20%">${{formatPrice(item.price)}}</td>
                                     <td style="width:15%" ng-show="hasOptions(item)">
-                                        <a data-toggle="modal" href="#myModal" ng-click="" class="btn btn-primary"><i class="icon-plus"></i></a>
+                                        <a data-toggle="modal" href="#myModal" ng-click="setModal(item)" class="btn btn-primary"><i class="icon-plus"></i></a>
                                     </td>
                                     <td style="width:15%" ng-show="!hasOptions(item)">
                                         <a class="btn btn-primary" type="submit" value="add" ng-click="addItem(item.name, item.price)"><i class="icon-plus"></i></a>
@@ -244,21 +244,22 @@ function PizzaCtrl($scope, $http) {
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title">Food Options</h4>
         </div>
-        <div class="modal-body">
-                  <p># free toppings left</p>
-
-        
-                <div ng-repeat="topping in toppings">
-                    <label class="checkbox-inline">
-                      <input type="checkbox" id="inlineCheckbox1" value="option1"> {{topping.name}}
-                    </label>
+        <div class="modal-body">        
+                <div ng-repeat="item in modalItem.items">
+                  <h2>{{item.name}}</h2>
+                  <div ng-repeat="option in item.options">
+                    <h3>{{option.name}}</h3>
+                    <div ng-repeat="optionItem in options[option.name]">
+                      <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox1" value="option1"> {{optionItem.name}}
+                      </label>
+                    </div>
+                  </div>
                 </div>
-
-    <p>Item Price-</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addItem(modalItem.name, modalItem.price)">Save changes</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
