@@ -9,4 +9,5 @@ exports.page = function(acc) {
     this.font = "";
     this.open = '<@';
     this.close = '@>';
+    this.customStyle = '';
 };

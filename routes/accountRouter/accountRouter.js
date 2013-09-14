@@ -28,6 +28,7 @@ exports.changeStyle = function(req, res, next){
                     pageData.backgroundColor = req.body.background;
                     pageData.secondaryColor = req.body.secondaryColor;
                     pageData.font = req.body.font;
+                    pageData.customStyle = req.body.customStyle;
                     acc.markModified('includePages');
                     acc.save(function(err){
                         page.generateAllPages(acc, function(){
