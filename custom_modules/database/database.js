@@ -1,4 +1,4 @@
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 var mongodb = require('mongodb');
 var mongoose = require('mongoose');
 

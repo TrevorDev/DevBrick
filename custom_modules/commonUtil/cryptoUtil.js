@@ -1,4 +1,4 @@
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 
 exports.crypt = function(string, callback){
     bcrypt.genSalt(10, function(err, salt) {
